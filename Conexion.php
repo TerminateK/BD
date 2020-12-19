@@ -4,9 +4,12 @@ $link='mysql:host=localhost;dbname=bd';
 $user='root';
 $pw='';
 
-try{
+try {
     $pdo= new PDO($link,$user,$pw);
-}catch (PDOException $e) {
+    echo 'Wena culiao';
+}
+
+catch (PDOException $e) {
     print "¡Error!: " . $e->getMessage() . "<br/>";
     die();
 }
