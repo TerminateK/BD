@@ -6,7 +6,6 @@ $pw='';
 
 try {
     $pdo= new PDO($link,$user,$pw);
-    echo 'Wena culiao';
 }
 
 catch (PDOException $e) {
