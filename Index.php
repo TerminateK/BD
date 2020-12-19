@@ -1,6 +1,6 @@
 <?php
 
-include_once 'Conexion.php'
+include_once 'Conexion.php';
 
     echo 'Wena culiao';
 ?>
