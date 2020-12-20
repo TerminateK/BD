@@ -88,6 +88,22 @@ include_once 'Conexion.php';
                 <div class="row">
                     <div class="col-lg-6 col-lg-offset-2">
                         <h1>Pagina</h1>
+
+                        <div class="card">
+                            <h5 class="card-header">Top de los 5 videos con más likes subidos por ciudadanos</h5>
+                            <div class="card-body">
+                                <div class="card" style="width: 18rem;">
+                                    <img src="mona.png" class="card-img-top" alt="...">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Mona</h5>
+                                        <p class="card-text">Joder, como quisiera respetarla</p>
+                                        <a href="#" class="btn btn-primary">Ver video</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
                         <p>Texto</p>
                     </div>
                 </div>
