@@ -34,7 +34,7 @@ include_once 'Conexion.php';
                     <li class="nav-item">
                         <a class="nav-link" href="#">Tendencias</a>
                     </li>
-                    <li class="nav-item dropdown">
+                    <!-- <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             Dropdown
                         </a>
@@ -44,7 +44,7 @@ include_once 'Conexion.php';
                             <li><hr class="dropdown-divider"></li>
                             <li><a class="dropdown-item" href="#">Something else here</a></li>
                         </ul>
-                    </li>
+                    </li> -->
                     <li class="nav-item">
                         <a class="nav-link enabled" href="#" tabindex="-1" aria-disabled="false">Subir video</a>
                     </li>
