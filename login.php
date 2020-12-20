@@ -1,11 +1,18 @@
+<?php
+    require "Conexion.php"
+
+
+
+?>
+
+
 <!DOCTYPE html>
-<html>
-    <head>
+<html lang="en">
+    <head type="login">
         <meta charset="utf-8">
-        <title>Bienvenido</title>
-        <h1>
-           Ingrese sus datos de ciudadano
-        </h1>
+        <h1>Bienvenidos</h1>
+        <h3> Ingrese sus datos de ciudadano</h3>
+        <link rel="stylesheet" href="style.css">
     </head>
     <body>
         <form action="login.php" method="post">
@@ -15,4 +22,4 @@
         </form>
     </body>
 
-</html>
+</html>|
