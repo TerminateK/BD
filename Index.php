@@ -2,6 +2,8 @@
 
 include_once 'Conexion.php';
 ?>
+
+
 <!doctype html>
 <html>
     <head>
@@ -16,8 +18,10 @@ include_once 'Conexion.php';
         <title>Yap!tube</title>
         <link rel="stylesheet" href="style.css">
 
-
     </head>
+
+
+
     <body>
 
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -70,7 +74,17 @@ include_once 'Conexion.php';
                         <a href="#">Usuario</a></div></div>
 
                 <li><a href="#home">Mis Videos</a></li>
-                <li><a href="#about">Listas de reproducción</a></li>
+                <li class="dropdown">
+                    <a href="#works" class="dropdown-toggle"  data-toggle="dropdown"> Listas de reproducción <span class="caret"></span></a>
+                    <ul class="dropdown-menu animated fadeInLeft" role="menu">
+                        <div class="dropdown-header">Dropdown heading</div>
+                        <li><a href="#pictures">Pictures</a></li>
+                        <li><a href="#videos">Videeos</a></li>
+                        <li><a href="#books">Books</a></li>
+                        <li><a href="#art">Art</a></li>
+                        <li><a href="#awards">Awards</a></li>
+                    </ul>
+                </li>
                 <li><a href="#events">Events</a></li>
                 <li><a href="#team">Team</a></li>
             </ul>
@@ -97,6 +111,19 @@ include_once 'Conexion.php';
                                     <div class="card-body">
                                         <h5 class="card-title">Mona</h5>
                                         <p class="card-text">Joder, como quisiera respetarla</p>
+                                        <a href="#" class="btn btn-primary">Ver video</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <h5 class="card-header">Top de los 5 videos con más likes subidos por héroes</h5>
+                            <div class="card-body">
+                                <div class="card" style="width: 18rem;">
+                                    <img src="monachina.jpg" class="card-img-top" alt="...">
+                                    <div class="card-body">
+                                        <h5 class="card-title">El meo poto</h5>
+                                        <p class="card-text">Joder, que buen poto</p>
                                         <a href="#" class="btn btn-primary">Ver video</a>
                                     </div>
                                 </div>
