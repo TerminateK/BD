@@ -5,7 +5,7 @@ $user='root';
 $pw='';
 
 try {
-    $pdo= new PDO($link,$user,$pw);
+    $pdo = new PDO($link,$user,$pw);
 }
 
 catch (PDOException $e) {

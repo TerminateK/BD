@@ -1,11 +1,8 @@
-
 div[class="container-fluid"] {margin-top:15px;}
 div[class="container-fluid"] {margin-bottom:15px;}
 nav[class="navbar navbar-inverse fixed-top"] {margin-top:70px;}
 button[type="button"] {margin-top:70px;}
 nav[class= "bar navbar-expand-lg navbar-dark bg-dark"] {margin-left: 700px;}
-
-
 
 body {
     position: relative;
