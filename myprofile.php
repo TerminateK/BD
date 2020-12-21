@@ -1,7 +1,10 @@
 <?php
-
 include_once 'Conexion.php';
 
+$seguidores = 'select p as id, num as n from (select @p1:=2 p) parm , bd.n_seguidores;';
+$nseg = $pdo->prepare($seguidores);
+$nseg->execute();
+$Rnseg = $nseg->fetchAll();
 ?>
 
 <!doctype html>
@@ -98,10 +101,33 @@ include_once 'Conexion.php';
                 <div class="col-12">
                     <h1>Mi Perfil</h1>
 
+                    <div class="container">
+                        <div class="content">
+                            <div class="profile-header">
+                                <div class="profile-header-cover"></div>
+                                <div class="profile-header-content">
+                                    <div class="profile-header-img">
+                                        <img src="poto1.jpg" alt="" height="20%" width="20%"/>
+                                    </div>
+                                    <div class="profile-header-info">
+                                        <h4 class="m-t-sm"> Usuario </h4>
+                                        <p class="m-b-sm">Descripcion</p>
+                                        <p>Seguidores: <?php echo $Rnseg[0]["n"] ?> </p>
+
+                                        <a href="#" class="btn btn-xs btn-primary mb-2">Edit Profile</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+
+
+
+
     <!-- /#page-content-wrapper -->
 
 </div>
