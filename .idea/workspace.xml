@@ -2,10 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6638a861-16ce-4c69-9e0f-971a2f3b31b0" name="Default Changelist" comment="Conexion a base de datos">
+      <change afterPath="$PROJECT_DIR$/logout.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Crear_Usuario.php" beforeDir="false" afterPath="$PROJECT_DIR$/Crear_Usuario.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Personas.php" beforeDir="false" afterPath="$PROJECT_DIR$/Personas.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/login.php" beforeDir="false" afterPath="$PROJECT_DIR$/login.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -164,7 +163,14 @@
       <option name="project" value="LOCAL" />
       <updated>1608515617345</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="Speedrun is real">
+      <created>1608526067807</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1608526067807</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -186,6 +192,7 @@
     <MESSAGE value="Cambios" />
     <MESSAGE value="." />
     <MESSAGE value="Conexion a base de datos" />
-    <option name="LAST_COMMIT_MESSAGE" value="Conexion a base de datos" />
+    <MESSAGE value="Speedrun is real" />
+    <option name="LAST_COMMIT_MESSAGE" value="Speedrun is real" />
   </component>
 </project>
