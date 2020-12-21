@@ -1,8 +1,5 @@
 <?php
     require "Conexion.php"
-
-
-
 ?>
 
 

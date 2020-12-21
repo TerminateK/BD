@@ -41,10 +41,7 @@ $resultadotop5D = $top5D->fetchAll();
 
     </head>
 
-
-
     <body>
-
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
             <a class="navbar-brand" href="#">Yap!tube</a>
@@ -76,7 +73,7 @@ $resultadotop5D = $top5D->fetchAll();
                 </ul>
                 <form class="d-flex">
                     <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success" type="submit">Search</button>
+                    <button class="btn btn-outline-light" type="submit">Buscar</button>
                 </form>
             </div>
         </div>
@@ -121,35 +118,6 @@ $resultadotop5D = $top5D->fetchAll();
                 <div class="row">
                     <div class="col-12">
                         <h1>Bienvenido a Yap!tube</h1>
-                        <!--
-                        <div class="card">
-                            <h5 class="card-header">Top de los 5 videos con más likes subidos por ciudadanos</h5>
-                            <div class="card-body">
-                                <div class="card" style="width: 18rem;">
-                                    <img src="mona.png" class="card-img-top" alt="...">
-                                    <div class="card-body">
-                                        <h5 class="card-title">Mona</h5>
-                                        <p class="card-text">Joder, como quisiera respetarla</p>
-                                        <a href="#" class="btn btn-primary">Ver video</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card">
-                            <h5 class="card-header">Top de los 5 videos con más likes subidos por héroes</h5>
-                            <div class="card-body">
-                                <div class="card" style="width: 18rem;">
-                                    <img src="monachina.jpg" class="card-img-top" alt="...">
-                                    <div class="card-body">
-                                        <h5 class="card-title">El meo poto</h5>
-                                        <p class="card-text">Joder, que buen poto</p>
-                                        <a href="#" class="btn btn-primary">Ver video</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        -->
-
                         <div class="card">
                             <h5 class="card-header">Top de los 5 videos con más likes subidos por ciudadanos</h5>
                                 <div class="card-body">
@@ -222,7 +190,6 @@ $resultadotop5D = $top5D->fetchAll();
                         <div class="card">
                             <h5 class="card-header">Top de los 5 videos con más dislikes</h5>
                             <div class="card-body">
-
                                 <div class="row" >
                                     <div class="col-1"> </div>
                                     <?php foreach ($resultadotop5D as $dato): ?>
