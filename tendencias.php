@@ -124,7 +124,7 @@ $resultadotop5D = $top5D->fetchAll();
                                                 <h5 class="card-title"><?php echo $dato['titulo'] ?></h5>
                                                 <p class="card-text"><?php echo $dato['descripcion'] ?></p>
                                                 <p class="card-text" style="font-size:11px"><?php echo $dato['username'] ?></p>
-                                                <a href="#" class="btn btn-primary">Ver video</a>
+                                                <a href="display_video.php?id_video=<?php echo $dato['id_video']?>" class="btn btn-primary">Ver video</a>
                                             </div>
                                         </div>
                                     </div>
@@ -146,7 +146,7 @@ $resultadotop5D = $top5D->fetchAll();
                                                 <h5 class="card-title"><?php echo $dato['titulo'] ?></h5>
                                                 <p class="card-text"><?php echo $dato['descripcion'] ?></p>
                                                 <p class="card-text" style="font-size:11px"><?php echo $dato['username'] ?></p>
-                                                <a href="#" class="btn btn-primary">Ver video</a>
+                                                <a href="display_video.php?id_video=<?php echo $dato['id_video']?>" class="btn btn-primary">Ver video</a>
 
                                             </div>
                                         </div>
@@ -169,7 +169,7 @@ $resultadotop5D = $top5D->fetchAll();
                                                 <h5 class="card-title"><?php echo $dato['titulo'] ?></h5>
                                                 <p class="card-text"><?php echo $dato['descripcion'] ?></p>
                                                 <p class="card-text" style="font-size:11px"><?php echo $dato['username'] ?></p>
-                                                <a href="#" class="btn btn-primary">Ver video</a>
+                                                <a href="display_video.php?id_video=<?php echo $dato['id_video']?>" class="btn btn-primary">Ver video</a>
 
                                             </div>
                                         </div>
@@ -191,7 +191,7 @@ $resultadotop5D = $top5D->fetchAll();
                                                 <h5 class="card-title"><?php echo $dato['titulo'] ?></h5>
                                                 <p class="card-text"><?php echo $dato['descripcion'] ?></p>
                                                 <p class="card-text" style="font-size:11px"><?php echo $dato['username'] ?></p>
-                                                <a href="#" class="btn btn-primary">Ver video</a>
+                                                <a href="display_video.php?id_video=<?php echo $dato['id_video']?>" class="btn btn-primary">Ver video</a>
 
                                             </div>
                                         </div>

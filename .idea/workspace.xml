@@ -2,14 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6638a861-16ce-4c69-9e0f-971a2f3b31b0" name="Default Changelist" comment="Conexion a base de datos">
-      <change afterPath="$PROJECT_DIR$/comentarios.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/display_video.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/stylecomments.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tendencias.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Index.php" beforeDir="false" afterPath="$PROJECT_DIR$/Index.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fondo.php" beforeDir="false" afterPath="$PROJECT_DIR$/fondo.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/myprofile.php" beforeDir="false" afterPath="$PROJECT_DIR$/myprofile.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/display_video.php" beforeDir="false" afterPath="$PROJECT_DIR$/display_video.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tendencias.php" beforeDir="false" afterPath="$PROJECT_DIR$/tendencias.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -63,6 +58,8 @@
       <workItem from="1608411819446" duration="17950000" />
       <workItem from="1608492876757" duration="12402000" />
       <workItem from="1608613498495" duration="5357000" />
+      <workItem from="1608652288273" duration="735000" />
+      <workItem from="1608656143992" duration="4500000" />
     </task>
     <task id="LOCAL-00001" summary=".">
       <created>1608407512657</created>
@@ -176,7 +173,14 @@
       <option name="project" value="LOCAL" />
       <updated>1608526067807</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="Conexion a base de datos">
+      <created>1608652376272</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1608652376272</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -197,8 +201,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Cambios" />
     <MESSAGE value="." />
-    <MESSAGE value="Conexion a base de datos" />
     <MESSAGE value="Speedrun is real" />
-    <option name="LAST_COMMIT_MESSAGE" value="Speedrun is real" />
+    <MESSAGE value="Conexion a base de datos" />
+    <option name="LAST_COMMIT_MESSAGE" value="Conexion a base de datos" />
   </component>
 </project>

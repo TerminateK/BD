@@ -1,6 +1,13 @@
 <?php
 
 include_once 'Conexion.php';
+
+$idvideo = $_GET["id_video"];
+$video = 'SELECT * FROM bd.video WHERE id_video = '.$idvideo.'';
+$mivideo = $pdo->prepare($video);
+$mivideo->execute();
+$resultadoVideo = $mivideo->fetchAll();
+
 ?>
 
 
@@ -84,6 +91,9 @@ include_once 'Conexion.php';
         </button>
         <div class="container">
             <div class="row">
+                <h1><?php echo $resultadoVideo[0]['titulo'] ?></h1>
+
+
 
 
             </div>
