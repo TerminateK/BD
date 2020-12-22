@@ -1,6 +1,6 @@
 <?php
 
-include_once "Conexion.php";
+include_once("Conexion.php");
 session_start();
 
 if($_POST){
@@ -18,8 +18,17 @@ if($_POST){
     }
     else{
         $_SESSION["username"]=$user;
+        $_SESSION['ID_Cuenta'] = $resultado['id_cuenta'];
         $_SESSION['Tipo_cuenta'] = $resultado['tipo_cuenta'];
-        $_SESSION['ID_Persona']= $resultado['id_persona'];
+        $id = $resultado['id_persona'];
+        $_SESSION['ID_Persona']= $id;
+
+        $stmnt = $pdo->query("SELECT * FROM persona WHERE id_persona = '$id'")->fetch();
+
+        $_SESSION['Tipo_Persona'] = $stmnt['tipo_persona'];
+        $_SESSION['Nombre'] = $stmnt['nombre'];
+        echo $_SESSION['Nombre'];
+
         header("location:index.php");
         }
 }
@@ -52,12 +61,12 @@ if($_POST){
                     <div class="form-group">
                         <div class="input-group-prepend">
                             <span class="input-group-text"><i class="fas fa-user"></i></span>
-                            <input type="text" name="usuario" class="form-control" placeholder="Usuario">
+                            <input type="text"  REQUIRED name="usuario" class="form-control" placeholder="Usuario">
                         </div>
                         <div class="form-group">
                             <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="fas fa-key"></i></span>
-                                <input type="password" name="contrasena" class="form-control" placeholder="Contraseña">
+                                <input type="password" REQUIRED name="contrasena" class="form-control" placeholder="Contraseña">
                             </div>
                         </div>
                         <button type="submit" class="btn btn-primary">Submit</button>
