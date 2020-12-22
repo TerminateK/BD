@@ -1,11 +1,8 @@
 <?php
-include_once 'Conexion.php';
 
-$seguidores = 'select p as id, num as n from (select @p1:=2 p) parm , bd.n_seguidores;';
-$nseg = $pdo->prepare($seguidores);
-$nseg->execute();
-$Rnseg = $nseg->fetchAll();
+include_once 'Conexion.php';
 ?>
+
 
 <!doctype html>
 <html>
@@ -33,7 +30,7 @@ $Rnseg = $nseg->fetchAll();
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="Index.php">Inicio</a>
+                    <a class="nav-link active" aria-current="page" href="index.php">Inicio</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="tendencias.php">Tendencias</a>
@@ -60,7 +57,7 @@ $Rnseg = $nseg->fetchAll();
             <div class="sidebar-header">
                 <div class="sidebar-brand">
                     <!-- NOMBRE DE USUARIO -->
-                    <a href="#">Usuario</a></div></div>
+                    <a href="myprofile.php">Usuario</a></div></div>
             <li class="dropdown">
                 <a href="#works" class="dropdown-toggle"  data-toggle="dropdown"> Listas de reproducción <span class="caret"></span></a>
                 <ul class="dropdown-menu animated fadeInLeft" role="menu">
@@ -87,36 +84,11 @@ $Rnseg = $nseg->fetchAll();
         </button>
         <div class="container">
             <div class="row">
-                <div class="col-12">
-                    <h1>Mi Perfil</h1>
 
-                    <div class="container">
-                        <div class="content">
-                            <div class="profile-header">
-                                <div class="profile-header-cover"></div>
-                                <div class="profile-header-content">
-                                    <div class="profile-header-img">
-                                        <img src="" alt="" height="20%" width="20%"/>
-                                    </div>
-                                    <div class="profile-header-info">
-                                        <h4 class="m-t-sm"> Usuario </h4>
-                                        <p class="m-b-sm">Descripcion</p>
-                                        <p>Seguidores: <?php echo $Rnseg[0]["n"] ?> </p>
 
-                                        <a href="#" class="btn btn-xs btn-primary mb-2">Edit Profile</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
     </div>
-
-
-
-
     <!-- /#page-content-wrapper -->
 
 </div>

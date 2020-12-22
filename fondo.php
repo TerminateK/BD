@@ -4,6 +4,7 @@ include_once 'Conexion.php';
 
 ?>
 
+
 <!doctype html>
 <html>
 <head>
@@ -23,29 +24,18 @@ include_once 'Conexion.php';
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
-        <a class="navbar-brand" href="#">Yap!tube</a>
+        <a class="navbar-brand" href="Index.php">Yap!tube</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Inicio</a>
+                    <a class="nav-link active" aria-current="page" href="index.php">Inicio</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Tendencias</a>
+                    <a class="nav-link" href="tendencias.php">Tendencias</a>
                 </li>
-                <!-- <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Dropdown
-                    </a>
-                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="#">Action</a></li>
-                        <li><a class="dropdown-item" href="#">Another action</a></li>
-                        <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item" href="#">Something else here</a></li>
-                    </ul>
-                </li> -->
                 <li class="nav-item">
                     <a class="nav-link enabled" href="#" tabindex="-1" aria-disabled="false">Subir video</a>
                 </li>
@@ -68,7 +58,7 @@ include_once 'Conexion.php';
             <div class="sidebar-header">
                 <div class="sidebar-brand">
                     <!-- NOMBRE DE USUARIO -->
-                    <a href="#">Usuario</a></div></div>
+                    <a href="myprofile.php">Usuario</a></div></div>
             <li class="dropdown">
                 <a href="#works" class="dropdown-toggle"  data-toggle="dropdown"> Listas de reproducción <span class="caret"></span></a>
                 <ul class="dropdown-menu animated fadeInLeft" role="menu">
@@ -96,8 +86,7 @@ include_once 'Conexion.php';
         <div class="container">
             <div class="row">
                 <div class="col-12">
-                    <h1>Mi Perfil</h1>
-
+                    <h1>Bienvenido a Yap!tube</h1>
                 </div>
             </div>
         </div>
