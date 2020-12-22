@@ -56,12 +56,12 @@ if($_POST) {
                     <div class="form-group">
                         <div class="input-group-prepend">
                             <span class="input-group-text"><i class="fa fa-user-circle"></i></span>
-                            <input type="text" name="usuario" placeholder="Ingrese su Nombre">
+                            <input type="text" REQUIRED name="usuario" placeholder="Ingrese su Nombre">
                         </div>
                         <div class="form-group">
                             <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="fa fa-key"></i></span>
-                                <input type="text" name="contrasena" placeholder="Ingrese su tipo">
+                                <input type="text" REQUIRED name="contrasena" placeholder="Ingrese su tipo">
                             </div>
 
                             <br>
