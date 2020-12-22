@@ -2,26 +2,6 @@
 
 include_once 'Conexion.php';
 
-$top5ciudadanos = 'SELECT * FROM bd.top5_ciudadanos';
-$top5C = $pdo->prepare($top5ciudadanos);
-$top5C->execute();
-$resultadotop5C = $top5C->fetchAll();
-
-$top5heroes = 'SELECT * FROM bd.top5_heroes';
-$top5H = $pdo->prepare($top5heroes);
-$top5H->execute();
-$resultadotop5H = $top5H->fetchAll();
-
-$top5villanos = 'SELECT * FROM bd.top5_villanos';
-$top5V = $pdo->prepare($top5villanos);
-$top5V->execute();
-$resultadotop5V = $top5V->fetchAll();
-
-$top5dislikes = 'SELECT * FROM bd.mas_dislikes';
-$top5D = $pdo->prepare($top5dislikes);
-$top5D->execute();
-$resultadotop5D = $top5D->fetchAll();
-
 ?>
 
 
@@ -44,29 +24,18 @@ $resultadotop5D = $top5D->fetchAll();
     <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">Yap!tube</a>
+            <a class="navbar-brand" href="Index.php">Yap!tube</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Inicio</a>
+                        <a class="nav-link active" aria-current="page" href="index.php">Inicio</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Tendencias</a>
+                        <a class="nav-link" href="tendencias.php">Tendencias</a>
                     </li>
-                    <!-- <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Dropdown
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="#">Action</a></li>
-                            <li><a class="dropdown-item" href="#">Another action</a></li>
-                            <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="#">Something else here</a></li>
-                        </ul>
-                    </li> -->
                     <li class="nav-item">
                         <a class="nav-link enabled" href="#" tabindex="-1" aria-disabled="false">Subir video</a>
                     </li>
@@ -89,7 +58,7 @@ $resultadotop5D = $top5D->fetchAll();
                 <div class="sidebar-header">
                     <div class="sidebar-brand">
                         <!-- NOMBRE DE USUARIO -->
-                        <a href="#">Usuario</a></div></div>
+                        <a href="myprofile.php">Usuario</a></div></div>
                 <li class="dropdown">
                     <a href="#works" class="dropdown-toggle"  data-toggle="dropdown"> Listas de reproducción <span class="caret"></span></a>
                     <ul class="dropdown-menu animated fadeInLeft" role="menu">
@@ -118,97 +87,6 @@ $resultadotop5D = $top5D->fetchAll();
                 <div class="row">
                     <div class="col-12">
                         <h1>Bienvenido a Yap!tube</h1>
-                        <div class="card">
-                            <h5 class="card-header">Top de los 5 videos con más likes subidos por ciudadanos</h5>
-                                <div class="card-body">
-
-                                    <div class="row" >
-                                        <div class="col-1"> </div>
-                                        <?php foreach ($resultadotop5C as $dato): ?>
-                                            <div class="col-2">
-                                                <img class="card-img-top" src="mona.png" alt="Card image cap">
-                                                <div class="card">
-                                                    <div class="card-body">
-                                                        <h5 class="card-title"><?php echo $dato['titulo'] ?></h5>
-                                                        <p class="card-text"><?php echo $dato['descripcion'] ?></p>
-                                                        <p class="card-text" style="font-size:11px"><?php echo $dato['username'] ?></p>
-                                                        <a href="#" class="btn btn-primary">Ver video</a>
-
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        <?php endforeach; ?>
-                                    </div>
-                            </div>
-                        </div>
-                        <div class="card">
-                            <h5 class="card-header">Top de los 5 videos con más likes subidos por Héroes</h5>
-                            <div class="card-body">
-
-                                <div class="row" >
-                                    <div class="col-1"> </div>
-                                    <?php foreach ($resultadotop5H as $dato): ?>
-                                        <div class="col-2">
-                                            <img class="card-img-top" src="monachina.jpg" alt="Card image cap">
-                                            <div class="card">
-                                                <div class="card-body">
-                                                    <h5 class="card-title"><?php echo $dato['titulo'] ?></h5>
-                                                    <p class="card-text"><?php echo $dato['descripcion'] ?></p>
-                                                    <p class="card-text" style="font-size:11px"><?php echo $dato['username'] ?></p>
-                                                    <a href="#" class="btn btn-primary">Ver video</a>
-
-                                                </div>
-                                            </div>
-                                        </div>
-                                    <?php endforeach; ?>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card">
-                            <h5 class="card-header">Top de los 5 videos con más likes subidos por Villanos</h5>
-                            <div class="card-body">
-
-                                <div class="row" >
-                                    <div class="col-1"> </div>
-                                    <?php foreach ($resultadotop5V as $dato): ?>
-                                        <div class="col-2">
-                                            <img class="card-img-top" src="keqing.jpg" alt="Card image cap">
-                                            <div class="card">
-                                                <div class="card-body">
-                                                    <h5 class="card-title"><?php echo $dato['titulo'] ?></h5>
-                                                    <p class="card-text"><?php echo $dato['descripcion'] ?></p>
-                                                    <p class="card-text" style="font-size:11px"><?php echo $dato['username'] ?></p>
-                                                    <a href="#" class="btn btn-primary">Ver video</a>
-
-                                                </div>
-                                            </div>
-                                        </div>
-                                    <?php endforeach; ?>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card">
-                            <h5 class="card-header">Top de los 5 videos con más dislikes</h5>
-                            <div class="card-body">
-                                <div class="row" >
-                                    <div class="col-1"> </div>
-                                    <?php foreach ($resultadotop5D as $dato): ?>
-                                        <div class="col-2">
-                                            <img class="card-img-top" src="poto.jpg" alt="Card image cap">
-                                            <div class="card">
-                                                <div class="card-body">
-                                                    <h5 class="card-title"><?php echo $dato['titulo'] ?></h5>
-                                                    <p class="card-text"><?php echo $dato['descripcion'] ?></p>
-                                                    <p class="card-text" style="font-size:11px"><?php echo $dato['username'] ?></p>
-                                                    <a href="#" class="btn btn-primary">Ver video</a>
-
-                                                </div>
-                                            </div>
-                                        </div>
-                                    <?php endforeach; ?>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>

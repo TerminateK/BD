@@ -1,0 +1,226 @@
+<?php
+
+include_once 'Conexion.php';
+
+$top5ciudadanos = 'SELECT * FROM bd.top5_ciudadanos';
+$top5C = $pdo->prepare($top5ciudadanos);
+$top5C->execute();
+$resultadotop5C = $top5C->fetchAll();
+
+$top5heroes = 'SELECT * FROM bd.top5_heroes';
+$top5H = $pdo->prepare($top5heroes);
+$top5H->execute();
+$resultadotop5H = $top5H->fetchAll();
+
+$top5villanos = 'SELECT * FROM bd.top5_villanos';
+$top5V = $pdo->prepare($top5villanos);
+$top5V->execute();
+$resultadotop5V = $top5V->fetchAll();
+
+$top5dislikes = 'SELECT * FROM bd.mas_dislikes';
+$top5D = $pdo->prepare($top5dislikes);
+$top5D->execute();
+$resultadotop5D = $top5D->fetchAll();
+
+?>
+
+
+<!doctype html>
+<html>
+<head>
+
+
+
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+
+    <title>Yap!tube</title>
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="Index.php">Yap!tube</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="index.php">Inicio</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="tendencias.php">Tendencias</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link enabled" href="#" tabindex="-1" aria-disabled="false">Subir video</a>
+                </li>
+            </ul>
+            <form class="d-flex">
+                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-light" type="submit">Buscar</button>
+            </form>
+        </div>
+    </div>
+</nav>
+
+
+<div id="wrapper">
+    <div class="overlay"></div>
+
+    <!-- Sidebar -->
+    <nav class="navbar navbar-inverse fixed-top" id="sidebar-wrapper" role="navigation">
+        <ul class="nav sidebar-nav">
+            <div class="sidebar-header">
+                <div class="sidebar-brand">
+                    <!-- NOMBRE DE USUARIO -->
+                    <a href="myprofile.php">Usuario</a></div></div>
+            <li class="dropdown">
+                <i class="bi bi-caret-right"></i>
+                <a href="#works" class="dropdown-toggle"  data-toggle="dropdown"> Listas de reproducción <span class="caret"></span</a>
+                <ul class="dropdown-menu animated fadeInLeft" role="menu">
+                    <div class="dropdown-header">Dropdown heading</div>
+                    <li><a href="#pictures">Pictures</a></li>
+                    <li><a href="#videos">Videeos</a></li>
+                    <li><a href="#books">Books</a></li>
+                    <li><a href="#art">Art</a></li>
+                    <li><a href="#awards">Awards</a></li>
+                </ul>
+            </li>
+            <li><a href="#events">Events</a></li>
+            <li><a href="#team">Team</a></li>
+        </ul>
+    </nav>
+    <!-- /#sidebar-wrapper -->
+
+    <!-- Page Content -->
+    <div id="page-content-wrapper">
+        <button type="button" class="hamburger animated fadeInLeft is-closed" data-toggle="offcanvas">
+            <span class="hamb-top"></span>
+            <span class="hamb-middle"></span>
+            <span class="hamb-bottom"></span>
+        </button>
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <h1>Bienvenido a Yap!tube</h1>
+                    <div class="card">
+                        <h5 class="card-header">Top de los 5 videos con más likes subidos por ciudadanos</h5>
+                        <div class="card-body">
+
+                            <div class="row" >
+                                <div class="col-1"> </div>
+                                <?php foreach ($resultadotop5C as $dato): ?>
+                                    <div class="col-2">
+                                        <img class="card-img-top" src="" alt="Card image cap">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <h5 class="card-title"><?php echo $dato['titulo'] ?></h5>
+                                                <p class="card-text"><?php echo $dato['descripcion'] ?></p>
+                                                <p class="card-text" style="font-size:11px"><?php echo $dato['username'] ?></p>
+                                                <a href="display_video.php?id_video=<?php echo $dato['id_video']?>" class="btn btn-primary">Ver video</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                <?php endforeach; ?>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <h5 class="card-header">Top de los 5 videos con más likes subidos por Héroes</h5>
+                        <div class="card-body">
+
+                            <div class="row" >
+                                <div class="col-1"> </div>
+                                <?php foreach ($resultadotop5H as $dato): ?>
+                                    <div class="col-2">
+                                        <img class="card-img-top" src="" alt="Card image cap">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <h5 class="card-title"><?php echo $dato['titulo'] ?></h5>
+                                                <p class="card-text"><?php echo $dato['descripcion'] ?></p>
+                                                <p class="card-text" style="font-size:11px"><?php echo $dato['username'] ?></p>
+                                                <a href="display_video.php?id_video=<?php echo $dato['id_video']?>" class="btn btn-primary">Ver video</a>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                <?php endforeach; ?>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <h5 class="card-header">Top de los 5 videos con más likes subidos por Villanos</h5>
+                        <div class="card-body">
+
+                            <div class="row" >
+                                <div class="col-1"> </div>
+                                <?php foreach ($resultadotop5V as $dato): ?>
+                                    <div class="col-2">
+                                        <img class="card-img-top" src="" alt="Card image cap">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <h5 class="card-title"><?php echo $dato['titulo'] ?></h5>
+                                                <p class="card-text"><?php echo $dato['descripcion'] ?></p>
+                                                <p class="card-text" style="font-size:11px"><?php echo $dato['username'] ?></p>
+                                                <a href="display_video.php?id_video=<?php echo $dato['id_video']?>" class="btn btn-primary">Ver video</a>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                <?php endforeach; ?>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <h5 class="card-header">Top de los 5 videos con más dislikes</h5>
+                        <div class="card-body">
+                            <div class="row" >
+                                <div class="col-1"> </div>
+                                <?php foreach ($resultadotop5D as $dato): ?>
+                                    <div class="col-2">
+                                        <img class="card-img-top" src="" alt="Card image cap">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <h5 class="card-title"><?php echo $dato['titulo'] ?></h5>
+                                                <p class="card-text"><?php echo $dato['descripcion'] ?></p>
+                                                <p class="card-text" style="font-size:11px"><?php echo $dato['username'] ?></p>
+                                                <a href="display_video.php?id_video=<?php echo $dato['id_video']?>" class="btn btn-primary">Ver video</a>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                <?php endforeach; ?>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /#page-content-wrapper -->
+
+</div>
+<!-- /#wrapper -->
+
+
+
+<!-- Optional JavaScript; choose one of the two! -->
+
+<!-- Option 1: Bootstrap Bundle with Popper -->
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+<script src="toggle.js"></script>
+<!-- Option 2: Separate Popper and Bootstrap JS -->
+<!--
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js" integrity="sha384-q2kxQ16AaE6UbzuKqyBE9/u/KzioAlnx2maXQHiDX9d4/zp8Ok3f+M7DPm+Ib6IU" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.min.js" integrity="sha384-pQQkAEnwaBkjpqZ8RU1fF1AKtTcHJwFl3pblpTlHXybJjHpMYo79HY3hIi4NKxyj" crossorigin="anonymous"></script>
+-->
+</body>
+</html>
