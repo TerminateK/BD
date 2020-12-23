@@ -26,7 +26,7 @@ if($_POST) {
         $sentencia=$pdo->prepare($sql);
         $sentencia->execute(array($user));
         $resultado=$sentencia->fetch();
-        $_SESSION['id_cuenta'] = $resultado['id_cuenta'];
+        $_SESSION['ID_Cuenta'] = $resultado['id_cuenta'];
         $_SESSION['username'] = $user;
         $_SESSION['Tipo_cuenta'] = $resultado['tipo_cuenta'];
         header("location:index.php");

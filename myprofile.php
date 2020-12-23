@@ -1,5 +1,6 @@
 <?php
 include_once 'Conexion.php';
+session_start();
 
 $seguidores = 'select p as id, num as n from (select @p1:=2 p) parm , bd.n_seguidores;';
 $nseg = $pdo->prepare($seguidores);
@@ -39,7 +40,7 @@ $Rnseg = $nseg->fetchAll();
                     <a class="nav-link" href="tendencias.php">Tendencias</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link enabled" href="#" tabindex="-1" aria-disabled="false">Subir video</a>
+                    <a class="nav-link enabled" href="subir_imagen.php" tabindex="-1" aria-disabled="false">Subir video</a>
                 </li>
             </ul>
             <form class="d-flex">
@@ -60,20 +61,20 @@ $Rnseg = $nseg->fetchAll();
             <div class="sidebar-header">
                 <div class="sidebar-brand">
                     <!-- NOMBRE DE USUARIO -->
-                    <a href="#">Usuario</a></div></div>
+                    <?php if (isset($_SESSION['ID_Cuenta'])): ?>
+                    <a href="myprofile.php"><?php echo $_SESSION['username'] ?></a></div></div>
+            <?php else: ?>
+                <li><a href="login.php">Iniciar Sesión</a></li>
+            <?php endif ?>
+
             <li class="dropdown">
                 <a href="#works" class="dropdown-toggle"  data-toggle="dropdown"> Listas de reproducción <span class="caret"></span></a>
-                <ul class="dropdown-menu animated fadeInLeft" role="menu">
-                    <div class="dropdown-header">Dropdown heading</div>
-                    <li><a href="#pictures">Pictures</a></li>
-                    <li><a href="#videos">Videeos</a></li>
-                    <li><a href="#books">Books</a></li>
-                    <li><a href="#art">Art</a></li>
-                    <li><a href="#awards">Awards</a></li>
-                </ul>
             </li>
             <li><a href="#events">Events</a></li>
-            <li><a href="#team">Team</a></li>
+            <?php
+            if (isset($_SESSION['ID_Cuenta'])): ?>
+                <li><a href="logout.php">Salir</a></li>
+            <?php endif ?>
         </ul>
     </nav>
     <!-- /#sidebar-wrapper -->
@@ -103,7 +104,7 @@ $Rnseg = $nseg->fetchAll();
                                         <p class="m-b-sm">Descripcion</p>
                                         <p>Seguidores: <?php echo $Rnseg[0]["n"] ?> </p>
 
-                                        <a href="#" class="btn btn-xs btn-primary mb-2">Edit Profile</a>
+                                        <a href="#" class="btn btn-xs btn-primary mb-2">Editar mi perfil</a>
                                     </div>
                                 </div>
                             </div>
