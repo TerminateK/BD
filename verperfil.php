@@ -2,10 +2,23 @@
 include_once 'Conexion.php';
 session_start();
 
-$seguidores = 'select p as id, num as n from (select @p1:=2 p) parm , bd.n_seguidores;';
+$idcuenta = $_GET["id_cuenta"];
+
+$seguidores = 'select p as id, num as n from (select @p1:='.$idcuenta.' p) parm , bd.n_seguidores;';
 $nseg = $pdo->prepare($seguidores);
 $nseg->execute();
 $Rnseg = $nseg->fetchAll();
+
+$cuent = 'SELECT * FROM bd.cuenta WHERE id_cuenta = '.$idcuenta.'';
+$cuen = $pdo->prepare($cuent);
+$cuen->execute();
+$cuenta = $cuen->fetchAll();
+
+$per = 'SELECT * FROM bd.cuenta, bd.persona WHERE cuenta.id_cuenta = '.$idcuenta.' AND cuenta.id_persona = persona.id_persona';
+$pers = $pdo->prepare($per);
+$pers->execute();
+$persona = $pers->fetchAll();
+
 ?>
 
 <!doctype html>
@@ -43,9 +56,9 @@ $Rnseg = $nseg->fetchAll();
                     <a class="nav-link enabled" href="subir_imagen.php" tabindex="-1" aria-disabled="false">Subir video</a>
                 </li>
             </ul>
-            <form class="d-flex">
-                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-light" type="submit">Buscar</button>
+            <form class="d-flex" method="get" action="buscar.php?">
+                <input class="form-control me-2" name="data"  type="search" placeholder="Search" aria-label="Search">
+                <button href="buscar.php?data=search" class="btn btn-outline-light" type="submit">Buscar</button>
             </form>
         </div>
     </div>
@@ -63,14 +76,14 @@ $Rnseg = $nseg->fetchAll();
                     <!-- NOMBRE DE USUARIO -->
                     <?php if (isset($_SESSION['ID_Cuenta'])): ?>
                     <a href="myprofile.php"><?php echo $_SESSION['username'] ?></a></div></div>
-            <?php if($_SESSION['Tipo_cuenta'] == 0): ?>
-                <p style="color:white;" style="text-align:center">Tipo: Ciudadano</p>
-            <?php  elseif( $_SESSION['Tipo_cuenta'] == 1 ): ?>
-                <p style="color:white;" style="text-align:center">Tipo: Heroe</p>
-            <?php else: ?>
-                <p style="color:white;" style="text-align:center">Tipo: Villano</p>
-            <?php endif ?>
-            <?php else: ?>
+                    <?php if($_SESSION['Tipo_Persona'] == 1): ?>
+                        <p style="color:white;" style="text-align:center">Tipo: Ciudadano</p>
+                    <?php  elseif( $_SESSION['Tipo_Persona'] == 2 ): ?>
+                        <p style="color:white;" style="text-align:center">Tipo: Heroe</p>
+                    <?php else: ?>
+                        <p style="color:white;" style="text-align:center">Tipo: Villano</p>
+                    <?php endif ?>
+                    <?php else: ?>
                 <li><a href="login.php">Iniciar Sesión</a></li>
             <?php endif ?>
 
@@ -95,7 +108,7 @@ $Rnseg = $nseg->fetchAll();
         <div class="container">
             <div class="row">
                 <div class="col-12">
-                    <h1>Mi Perfil</h1>
+                    <h1>Perfil</h1>
 
                     <div class="container">
                         <div class="content">
@@ -105,12 +118,9 @@ $Rnseg = $nseg->fetchAll();
                                     <div class="profile-header-img">
                                     </div>
                                     <div class="profile-header-info">
-                                        <h4 class="m-t-sm"> Usuario </h4>
-                                        <p class="m-b-sm">Descripcion</p>
+                                        <h4 class="m-t-sm"> <?php echo $cuenta[0]['username'] ?> </h4>
+                                        <p class="m-b-sm"> <?php echo $persona[0]['tipo_persona'] ?> </p>
                                         <p>Seguidores: <?php echo $Rnseg[0]["n"] ?> </p>
-
-                                        <a href="#" class="btn btn-xs btn-primary mb-2">Editar mi perfil</a>
-
                                     </div>
                                 </div>
                             </div>

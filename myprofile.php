@@ -3,8 +3,6 @@ include_once 'Conexion.php';
 session_start();
 
 
-
-
 $seguidores = 'select p as id, num as n from (select @p1:='.$_SESSION['ID_Cuenta'].' p) parm , bd.n_seguidores;';
 $nseg = $pdo->prepare($seguidores);
 $nseg->execute();
@@ -46,9 +44,9 @@ $Rnseg = $nseg->fetchAll();
                     <a class="nav-link enabled" href="subir_imagen.php" tabindex="-1" aria-disabled="false">Subir video</a>
                 </li>
             </ul>
-            <form class="d-flex">
-                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-light" type="submit">Buscar</button>
+            <form class="d-flex" method="get" action="buscar.php?">
+                <input class="form-control me-2" name="data"  type="search" placeholder="Search" aria-label="Search">
+                <button href="buscar.php?data=search" class="btn btn-outline-light" type="submit">Buscar</button>
             </form>
         </div>
     </div>
@@ -109,11 +107,19 @@ $Rnseg = $nseg->fetchAll();
                                     </div>
                                     <div class="profile-header-info">
                                         <h4 class="m-t-sm"> <?php echo $_SESSION['username'] ?> </h4>
-                                        <p class="m-b-sm"> <?php echo $_SESSION['Tipo_Persona'] ?> </p>
+                                        <p class="m-b-sm">
+                                            <?php if($_SESSION['Tipo_Persona'] == 1): ?>
+                                            <p style="color:black;" style="text-align:center">Tipo: Ciudadano</p>
+                                            <?php  elseif( $_SESSION['Tipo_Persona'] == 2 ): ?>
+                                                <p style="color:black;" style="text-align:center">Tipo: Heroe</p>
+                                            <?php else: ?>
+                                                <p style="color:black;" style="text-align:center">Tipo: Villano</p>
+                                            <?php endif ?>
+                                        </p>
+
                                         <p>Seguidores: <?php echo $Rnseg[0]["n"] ?> </p>
 
                                         <a href="#" class="btn btn-xs btn-primary mb-2">Editar mi perfil</a>
-
                                     </div>
                                 </div>
                             </div>

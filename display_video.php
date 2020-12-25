@@ -15,7 +15,6 @@ $cuent = 'SELECT * FROM bd.cuenta WHERE id_cuenta = '.$resultadoVideo[0]['id_cue
 $cuen = $pdo->prepare($cuent);
 $cuen->execute();
 $cuenta = $cuen->fetchAll();
-echo $cuenta[0]['username'];
 
 
 
@@ -114,9 +113,9 @@ $numdislikes = $ndlikes->fetchAll();
                     <?php endif ?>
                 </li>
             </ul>
-            <form class="d-flex">
-                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-light" type="submit">Buscar</button>
+            <form class="d-flex" method="get" action="buscar.php?">
+                <input class="form-control me-2" name="data"  type="search" placeholder="Search" aria-label="Search">
+                <button href="buscar.php?data=search" class="btn btn-outline-light" type="submit">Buscar</button>
             </form>
         </div>
     </div>
@@ -133,7 +132,7 @@ $numdislikes = $ndlikes->fetchAll();
                 <div class="sidebar-brand">
                     <!-- NOMBRE DE USUARIO -->
                     <?php if (isset($_SESSION['ID_Cuenta'])): ?>
-                        <a href="myprofile.php"><?php echo $_SESSION['username'] ?></a></div></div>
+                    <a href="myprofile.php"><?php echo $_SESSION['username'] ?></a></div></div>
                         <?php if($_SESSION['Tipo_Persona'] == 1): ?>
                             <p style="color:white;" style="text-align:center">Tipo: Ciudadano</p>
                         <?php  elseif( $_SESSION['Tipo_Persona'] == 2 ): ?>
@@ -176,13 +175,15 @@ $numdislikes = $ndlikes->fetchAll();
                 <div class="col-6" >
                     <h1><?php echo $resultadoVideo[0]['titulo'] ?></h1>
                     <img class="card-img-top" src="data:image/jpg;base64,<?php echo base64_encode($resultadoVideo[0]['img']) ?>" alt="Card image cap">
-                    <p><?php echo $resultadoVideo[0]['descripcion'] ?></p>
+
+                    <a href="verperfil.php?id_cuenta=<?php echo $cuenta[0]['id_cuenta']?>">  <?php echo $cuenta[0]['username'] ?></a></div></div>
+                    <p>Descripcion: <?php echo $resultadoVideo[0]['descripcion'] ?></p>
 
                     <a>Me gusta: <?php echo $numlikes[0]['num']?></a>
                     <a>- No me gusta: <?php echo $numdislikes[0]['num']?></a>
                     <?php if (isset($_SESSION['ID_Cuenta'])): ?>
-                        <button type="button" class="btn btn-success" onClick="location.href='display_video.php?id_video=46&like=0'">Me gusta</button>
-                        <button type="button" class="btn btn-success" onClick="location.href='display_video.php?id_video=46&like=1'">No me gusta</button>
+                        <button type="button" class="btn btn-success" onClick="location.href='display_video.php?id_video=<?php echo $idvideo ?>&like=0'">Me gusta</button>
+                        <button type="button" class="btn btn-success" onClick="location.href='display_video.php?id_video=<?php echo $idvideo ?>&like=1'">No me gusta</button>
                     <?php else: ?>
                         <button type="button" class="btn btn-success" onClick="location.href='login.php'">Me gusta</button>
                         <button type="button" class="btn btn-success" onClick="location.href='login.php'">No me gusta</button>
