@@ -124,7 +124,15 @@ $numdislikes = $ndlikes->fetchAll();
                 <div class="sidebar-brand">
                     <!-- NOMBRE DE USUARIO -->
                     <?php if (isset($_SESSION['ID_Cuenta'])): ?>
-                    <a href="myprofile.php"><?php echo $_SESSION['username'] ?></a></div></div>
+                        <a href="myprofile.php"><?php echo $_SESSION['username'] ?></a></div></div>
+                        <?php if($_SESSION['Tipo_cuenta'] == 0): ?>
+                            <p style="color:white;" style="text-align:center">Tipo: Ciudadano</p>
+                        <?php  elseif( $_SESSION['Tipo_cuenta'] == 1 ): ?>
+                            <p style="color:white;" style="text-align:center">Tipo: Heroe</p>
+                        <?php else: ?>
+                            <p style="color:white;" style="text-align:center">Tipo: Villano</p>
+                        <?php endif ?>
+
                     <?php else: ?>
                         <li><a href="login.php">Iniciar Sesión</a></li>
                     <?php endif ?>
@@ -163,7 +171,7 @@ $numdislikes = $ndlikes->fetchAll();
                     <a>- No me gusta: <?php echo $numdislikes[0]['num']?></a>
                     <button type="button" class="btn btn-success" onClick="location.href='display_video.php?id_video=46&like=0'">Me gusta</button>
                     <button type="button" class="btn btn-success" onClick="location.href='display_video.php?id_video=46&like=1'">No me gusta</button>
-                    <h6>Número de vistas: <?php echo $resultadoVideo[0]['n_vistas'] ?></h6>
+                    <a>Número de vistas: <?php echo $resultadoVideo[0]['n_vistas'] ?></a>
                 </div>
 
 
