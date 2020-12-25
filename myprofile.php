@@ -104,7 +104,6 @@ $Rnseg = $nseg->fetchAll();
                                 <div class="profile-header-cover"></div>
                                 <div class="profile-header-content">
                                     <div class="profile-header-img">
-                                        <img src="" alt="" height="20%" width="20%"/>
                                     </div>
                                     <div class="profile-header-info">
                                         <h4 class="m-t-sm"> Usuario </h4>
@@ -112,6 +111,7 @@ $Rnseg = $nseg->fetchAll();
                                         <p>Seguidores: <?php echo $Rnseg[0]["n"] ?> </p>
 
                                         <a href="#" class="btn btn-xs btn-primary mb-2">Editar mi perfil</a>
+
                                     </div>
                                 </div>
                             </div>
