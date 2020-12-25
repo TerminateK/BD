@@ -71,9 +71,9 @@ $resultadotop5D = $top5D->fetchAll();
                     <?php endif ?>
                 </li>
             </ul>
-            <form class="d-flex">
-                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-light" type="submit">Buscar</button>
+            <form class="d-flex" method="get" action="buscar.php?">
+                <input class="form-control me-2" name="data"  type="search" placeholder="Search" aria-label="Search">
+                <button href="buscar.php?data=search" class="btn btn-outline-light" type="submit">Buscar</button>
             </form>
         </div>
     </div>
@@ -90,7 +90,7 @@ $resultadotop5D = $top5D->fetchAll();
                 <div class="sidebar-brand">
                     <!-- NOMBRE DE USUARIO -->
                     <?php if (isset($_SESSION['ID_Cuenta'])): ?>
-                        <a href="myprofile.php"><?php echo $_SESSION['username'] ?></a></div></div>
+                    <a href="myprofile.php"><?php echo $_SESSION['username'] ?></a></div></div>
                         <?php if($_SESSION['Tipo_Persona'] == 1): ?>
                             <p style="color:white;" style="text-align:center;">Tipo: Ciudadano</p>
                         <?php  elseif( $_SESSION['Tipo_Persona'] == 2 ): ?>
@@ -125,7 +125,7 @@ $resultadotop5D = $top5D->fetchAll();
         <div class="container">
             <div class="row">
                 <div class="col-12">
-                    <h1>Bienvenido a Yap!tube</h1>
+                    <h1>Yap!tube</h1>
                     <div class="card">
                         <h5 class="card-header">Top de los 5 videos con más likes subidos por ciudadanos</h5>
                         <div class="card-body">

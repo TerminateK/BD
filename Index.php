@@ -3,6 +3,10 @@
 include_once 'Conexion.php';
 session_start();
 
+$top = 'select * from bd.video, bd.cuenta where	bd.video.id_cuenta = bd.cuenta.id_cuenta order by video.fecha_creacion desc limit 10;';
+$top10 = $pdo->prepare($top);
+$top10->execute();
+$topvid = $top10->fetchAll();
 ?>
 
 
@@ -46,9 +50,9 @@ session_start();
                         <?php endif ?>
                     </li>
                 </ul>
-                <form class="d-flex">
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-light" type="submit">Buscar</button>
+                <form class="d-flex" method="get" action="buscar.php?">
+                    <input class="form-control me-2" name="data"  type="search" placeholder="Search" aria-label="Search">
+                    <button href="buscar.php?data=search" class="btn btn-outline-light" type="submit">Buscar</button>
                 </form>
             </div>
         </div>
@@ -100,6 +104,30 @@ session_start();
                 <div class="row">
                     <div class="col-12">
                         <h1>Bienvenido a Yap!tube</h1>
+                        <div class="card">
+                            <h5 class="card-header">Los 10 videos mas recientes</h5>
+                            <div class="card-body">
+                                <div class="row" >
+                                    <div class="col-1"> </div>
+                                    <?php foreach ($topvid as $dato): ?>
+                                        <div class="col-2">
+                                            <img class="card-img-top" src="data:image/jpg;base64,<?php echo base64_encode($dato['img']) ?>" alt="Card image cap">
+                                            <div class="card">
+                                                <div class="card-body">
+                                                    <h5 class="card-title"><?php echo $dato['titulo'] ?></h5>
+                                                    <p class="card-text"><?php echo $dato['descripcion'] ?></p>
+                                                    <p class="card-text" style="font-size:11px"><?php echo $dato['username'] ?></p>
+                                                    <a href="display_video.php?id_video=<?php echo $dato['id_video']?>" class="btn btn-primary">Ver video</a>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    <?php endforeach; ?>
+                                </div>
+                            </div>
+                        </div>
+
+
                     </div>
                 </div>
             </div>
