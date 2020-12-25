@@ -1,9 +1,12 @@
 <?php
-
 include_once 'Conexion.php';
+session_start();
 
+$seguidores = 'select p as id, num as n from (select @p1:=2 p) parm , bd.n_seguidores;';
+$nseg = $pdo->prepare($seguidores);
+$nseg->execute();
+$Rnseg = $nseg->fetchAll();
 ?>
-
 
 <!doctype html>
 <html>
@@ -31,13 +34,13 @@ include_once 'Conexion.php';
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="index.php">Inicio</a>
+                    <a class="nav-link" aria-current="page" href="Index.php">Inicio</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="tendencias.php">Tendencias</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link enabled" href="#" tabindex="-1" aria-disabled="false">Subir video</a>
+                    <a class="nav-link enabled" href="subir_imagen.php" tabindex="-1" aria-disabled="false">Subir video</a>
                 </li>
             </ul>
             <form class="d-flex">
@@ -60,6 +63,13 @@ include_once 'Conexion.php';
                     <!-- NOMBRE DE USUARIO -->
                     <?php if (isset($_SESSION['ID_Cuenta'])): ?>
                     <a href="myprofile.php"><?php echo $_SESSION['username'] ?></a></div></div>
+            <?php if($_SESSION['Tipo_cuenta'] == 0): ?>
+                <p style="color:white;" style="text-align:center">Tipo: Ciudadano</p>
+            <?php  elseif( $_SESSION['Tipo_cuenta'] == 1 ): ?>
+                <p style="color:white;" style="text-align:center">Tipo: Heroe</p>
+            <?php else: ?>
+                <p style="color:white;" style="text-align:center">Tipo: Villano</p>
+            <?php endif ?>
             <?php else: ?>
                 <li><a href="login.php">Iniciar Sesión</a></li>
             <?php endif ?>
@@ -85,11 +95,35 @@ include_once 'Conexion.php';
         <div class="container">
             <div class="row">
                 <div class="col-12">
-                    <h1>Bienvenido a Yap!tube</h1>
+                    <h1>Mi Perfil</h1>
+
+                    <div class="container">
+                        <div class="content">
+                            <div class="profile-header">
+                                <div class="profile-header-cover"></div>
+                                <div class="profile-header-content">
+                                    <div class="profile-header-img">
+                                    </div>
+                                    <div class="profile-header-info">
+                                        <h4 class="m-t-sm"> Usuario </h4>
+                                        <p class="m-b-sm">Descripcion</p>
+                                        <p>Seguidores: <?php echo $Rnseg[0]["n"] ?> </p>
+
+                                        <a href="#" class="btn btn-xs btn-primary mb-2">Editar mi perfil</a>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+
+
+
+
     <!-- /#page-content-wrapper -->
 
 </div>

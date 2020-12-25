@@ -66,9 +66,9 @@ session_start();
                         <!-- NOMBRE DE USUARIO -->
                         <?php if (isset($_SESSION['ID_Cuenta'])): ?>
                             <a href="myprofile.php"><?php echo $_SESSION['username'] ?></a></div></div>
-                            <?php if($_SESSION['Tipo_cuenta'] == 0): ?>
+                            <?php if($_SESSION['Tipo_Persona'] == 1): ?>
                                 <p style="color:white;" style="text-align:center">Tipo: Ciudadano</p>
-                            <?php  elseif( $_SESSION['Tipo_cuenta'] == 1 ): ?>
+                            <?php  elseif( $_SESSION['Tipo_Persona'] == 2 ): ?>
                                 <p style="color:white;" style="text-align:center">Tipo: Heroe</p>
                             <?php else: ?>
                                 <p style="color:white;" style="text-align:center">Tipo: Villano</p>
@@ -81,7 +81,6 @@ session_start();
                 <li class="dropdown">
                     <a href="#works" class="dropdown-toggle"  data-toggle="dropdown"> Listas de reproducción <span class="caret"></span></a>
                 </li>
-                <li><a href="#events">Events</a></li>
                 <?php
                 if (isset($_SESSION['ID_Cuenta'])): ?>
                     <li><a href="logout.php">Salir</a></li>

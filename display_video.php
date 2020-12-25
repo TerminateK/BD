@@ -10,6 +10,15 @@ $mivideo = $pdo->prepare($video);
 $mivideo->execute();
 $resultadoVideo = $mivideo->fetchAll();
 
+
+$cuent = 'SELECT * FROM bd.cuenta WHERE id_cuenta = '.$resultadoVideo[0]['id_cuenta'].'';
+$cuen = $pdo->prepare($cuent);
+$cuen->execute();
+$cuenta = $cuen->fetchAll();
+echo $cuenta[0]['username'];
+
+
+
 $updvistas = 'UPDATE bd.video SET n_vistas = n_vistas + 1 WHERE video.id_video = '.$idvideo.'';
 $updateV = $pdo->prepare($updvistas);
 $updateV->execute();
@@ -125,9 +134,9 @@ $numdislikes = $ndlikes->fetchAll();
                     <!-- NOMBRE DE USUARIO -->
                     <?php if (isset($_SESSION['ID_Cuenta'])): ?>
                         <a href="myprofile.php"><?php echo $_SESSION['username'] ?></a></div></div>
-                        <?php if($_SESSION['Tipo_cuenta'] == 0): ?>
+                        <?php if($_SESSION['Tipo_Persona'] == 1): ?>
                             <p style="color:white;" style="text-align:center">Tipo: Ciudadano</p>
-                        <?php  elseif( $_SESSION['Tipo_cuenta'] == 1 ): ?>
+                        <?php  elseif( $_SESSION['Tipo_Persona'] == 2 ): ?>
                             <p style="color:white;" style="text-align:center">Tipo: Heroe</p>
                         <?php else: ?>
                             <p style="color:white;" style="text-align:center">Tipo: Villano</p>
@@ -147,8 +156,10 @@ $numdislikes = $ndlikes->fetchAll();
                     <li><a href="#awards">Awards</a></li>
                 </ul>
             </li>
-            <li><a href="#events">Events</a></li>
-            <li><a href="#team">Team</a></li>
+            <?php
+            if (isset($_SESSION['ID_Cuenta'])): ?>
+                <li><a href="logout.php">Salir</a></li>
+            <?php endif ?>
         </ul>
     </nav>
     <!-- /#sidebar-wrapper -->
@@ -169,8 +180,13 @@ $numdislikes = $ndlikes->fetchAll();
 
                     <a>Me gusta: <?php echo $numlikes[0]['num']?></a>
                     <a>- No me gusta: <?php echo $numdislikes[0]['num']?></a>
-                    <button type="button" class="btn btn-success" onClick="location.href='display_video.php?id_video=46&like=0'">Me gusta</button>
-                    <button type="button" class="btn btn-success" onClick="location.href='display_video.php?id_video=46&like=1'">No me gusta</button>
+                    <?php if (isset($_SESSION['ID_Cuenta'])): ?>
+                        <button type="button" class="btn btn-success" onClick="location.href='display_video.php?id_video=46&like=0'">Me gusta</button>
+                        <button type="button" class="btn btn-success" onClick="location.href='display_video.php?id_video=46&like=1'">No me gusta</button>
+                    <?php else: ?>
+                        <button type="button" class="btn btn-success" onClick="location.href='login.php'">Me gusta</button>
+                        <button type="button" class="btn btn-success" onClick="location.href='login.php'">No me gusta</button>
+                    <?php endif ?>
                     <a>Número de vistas: <?php echo $resultadoVideo[0]['n_vistas'] ?></a>
                 </div>
 
