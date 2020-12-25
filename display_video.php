@@ -8,6 +8,10 @@ $mivideo = $pdo->prepare($video);
 $mivideo->execute();
 $resultadoVideo = $mivideo->fetchAll();
 
+$updvistas = 'UPDATE bd.video SET n_vistas = n_vistas + 1 WHERE video.id_video = '.$idvideo.'';
+$updateV = $pdo->prepare($updvistas);
+$updateV->execute();
+
 ?>
 
 
@@ -43,7 +47,11 @@ $resultadoVideo = $mivideo->fetchAll();
                     <a class="nav-link" href="tendencias.php">Tendencias</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link enabled" href="#" tabindex="-1" aria-disabled="false">Subir video</a>
+                    <?php if (isset($_SESSION['ID_Cuenta'])): ?>
+                        <a class="nav-link enabled" href="subir_imagen.php" tabindex="-1" aria-disabled="false">Subir video</a>
+                    <?php else: ?>
+                        <a class="nav-link enabled" href="login.php" tabindex="-1" aria-disabled="false">Inicie sesión para subir video</a>
+                    <?php endif ?>
                 </li>
             </ul>
             <form class="d-flex">
@@ -64,7 +72,11 @@ $resultadoVideo = $mivideo->fetchAll();
             <div class="sidebar-header">
                 <div class="sidebar-brand">
                     <!-- NOMBRE DE USUARIO -->
-                    <a href="myprofile.php">Usuario</a></div></div>
+                    <?php if (isset($_SESSION['ID_Cuenta'])): ?>
+                    <a href="myprofile.php"><?php echo $_SESSION['username'] ?></a></div></div>
+                    <?php else: ?>
+                        <li><a href="login.php">Iniciar Sesión</a></li>
+                    <?php endif ?>
             <li class="dropdown">
                 <a href="#works" class="dropdown-toggle"  data-toggle="dropdown"> Listas de reproducción <span class="caret"></span></a>
                 <ul class="dropdown-menu animated fadeInLeft" role="menu">
@@ -90,10 +102,20 @@ $resultadoVideo = $mivideo->fetchAll();
             <span class="hamb-bottom"></span>
         </button>
         <div class="container">
-            <div class="row">
-                <h1><?php echo $resultadoVideo[0]['titulo'] ?></h1>
+            <div class="row" >
+                <div class="col-4" >
+                    <h1><?php echo $resultadoVideo[0]['titulo'] ?></h1>
+                    <img class="card-img-top" src="data:image/jpg;base64,<?php echo base64_encode($resultadoVideo[0]['img']) ?>" alt="Card image cap">
+                    <a><?php echo $resultadoVideo[0]['descripcion'] ?></a>
 
 
+
+                    <button type="button" class="btn btn-outline-secondary">Like</button>
+
+                    <button type="button" class="btn btn-outline-secondary">Dislike</button>
+
+                    <h6>Número de vistas: <?php echo $resultadoVideo[0]['n_vistas'] ?></h6>
+                </div>
 
 
             </div>

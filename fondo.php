@@ -58,20 +58,20 @@ include_once 'Conexion.php';
             <div class="sidebar-header">
                 <div class="sidebar-brand">
                     <!-- NOMBRE DE USUARIO -->
-                    <a href="myprofile.php">Usuario</a></div></div>
+                    <?php if (isset($_SESSION['ID_Cuenta'])): ?>
+                    <a href="myprofile.php"><?php echo $_SESSION['username'] ?></a></div></div>
+            <?php else: ?>
+                <li><a href="login.php">Iniciar Sesión</a></li>
+            <?php endif ?>
+
             <li class="dropdown">
                 <a href="#works" class="dropdown-toggle"  data-toggle="dropdown"> Listas de reproducción <span class="caret"></span></a>
-                <ul class="dropdown-menu animated fadeInLeft" role="menu">
-                    <div class="dropdown-header">Dropdown heading</div>
-                    <li><a href="#pictures">Pictures</a></li>
-                    <li><a href="#videos">Videeos</a></li>
-                    <li><a href="#books">Books</a></li>
-                    <li><a href="#art">Art</a></li>
-                    <li><a href="#awards">Awards</a></li>
-                </ul>
             </li>
             <li><a href="#events">Events</a></li>
-            <li><a href="#team">Team</a></li>
+            <?php
+            if (isset($_SESSION['ID_Cuenta'])): ?>
+                <li><a href="logout.php">Salir</a></li>
+            <?php endif ?>
         </ul>
     </nav>
     <!-- /#sidebar-wrapper -->

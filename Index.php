@@ -1,6 +1,7 @@
 <?php
 
 include_once 'Conexion.php';
+session_start();
 
 ?>
 
@@ -37,7 +38,11 @@ include_once 'Conexion.php';
                         <a class="nav-link" href="tendencias.php">Tendencias</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link enabled" href="#" tabindex="-1" aria-disabled="false">Subir video</a>
+                        <?php if (isset($_SESSION['ID_Cuenta'])): ?>
+                            <a class="nav-link enabled" href="subir_imagen.php" tabindex="-1" aria-disabled="false">Subir video</a>
+                        <?php else: ?>
+                            <a class="nav-link enabled" href="login.php" tabindex="-1" aria-disabled="false">Inicie sesión para subir video</a>
+                        <?php endif ?>
                     </li>
                 </ul>
                 <form class="d-flex">
@@ -58,20 +63,20 @@ include_once 'Conexion.php';
                 <div class="sidebar-header">
                     <div class="sidebar-brand">
                         <!-- NOMBRE DE USUARIO -->
-                        <a href="myprofile.php">Usuario</a></div></div>
+                        <?php if (isset($_SESSION['ID_Cuenta'])): ?>
+                            <a href="myprofile.php"><?php echo $_SESSION['username'] ?></a></div></div>
+                        <?php else: ?>
+                            <li><a href="login.php">Iniciar Sesión</a></li>
+                        <?php endif ?>
+
                 <li class="dropdown">
                     <a href="#works" class="dropdown-toggle"  data-toggle="dropdown"> Listas de reproducción <span class="caret"></span></a>
-                    <ul class="dropdown-menu animated fadeInLeft" role="menu">
-                        <div class="dropdown-header">Dropdown heading</div>
-                        <li><a href="#pictures">Pictures</a></li>
-                        <li><a href="#videos">Videeos</a></li>
-                        <li><a href="#books">Books</a></li>
-                        <li><a href="#art">Art</a></li>
-                        <li><a href="#awards">Awards</a></li>
-                    </ul>
                 </li>
                 <li><a href="#events">Events</a></li>
-                <li><a href="#team">Team</a></li>
+                <?php
+                if (isset($_SESSION['ID_Cuenta'])): ?>
+                    <li><a href="logout.php">Salir</a></li>
+                <?php endif ?>
             </ul>
         </nav>
         <!-- /#sidebar-wrapper -->
