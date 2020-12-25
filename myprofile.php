@@ -3,6 +3,8 @@ include_once 'Conexion.php';
 session_start();
 
 
+
+
 $seguidores = 'select p as id, num as n from (select @p1:='.$_SESSION['ID_Cuenta'].' p) parm , bd.n_seguidores;';
 $nseg = $pdo->prepare($seguidores);
 $nseg->execute();
