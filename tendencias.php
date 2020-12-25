@@ -91,9 +91,9 @@ $resultadotop5D = $top5D->fetchAll();
                     <!-- NOMBRE DE USUARIO -->
                     <?php if (isset($_SESSION['ID_Cuenta'])): ?>
                         <a href="myprofile.php"><?php echo $_SESSION['username'] ?></a></div></div>
-                        <?php if($_SESSION['Tipo_cuenta'] == 0): ?>
+                        <?php if($_SESSION['Tipo_Persona'] == 1): ?>
                             <p style="color:white;" style="text-align:center;">Tipo: Ciudadano</p>
-                        <?php  elseif( $_SESSION['Tipo_cuenta'] == 1 ): ?>
+                        <?php  elseif( $_SESSION['Tipo_Persona'] == 2 ): ?>
                             <p style="color:white;" style="text-align:center">Tipo: Heroe</p>
                         <?php else: ?>
                             <p style="color:white;" style="text-align:center">Tipo: Villano</p>

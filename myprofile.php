@@ -2,7 +2,8 @@
 include_once 'Conexion.php';
 session_start();
 
-$seguidores = 'select p as id, num as n from (select @p1:=2 p) parm , bd.n_seguidores;';
+
+$seguidores = 'select p as id, num as n from (select @p1:='.$_SESSION['ID_Cuenta'].' p) parm , bd.n_seguidores;';
 $nseg = $pdo->prepare($seguidores);
 $nseg->execute();
 $Rnseg = $nseg->fetchAll();
@@ -63,9 +64,9 @@ $Rnseg = $nseg->fetchAll();
                     <!-- NOMBRE DE USUARIO -->
                     <?php if (isset($_SESSION['ID_Cuenta'])): ?>
                     <a href="myprofile.php"><?php echo $_SESSION['username'] ?></a></div></div>
-                        <?php if($_SESSION['Tipo_cuenta'] == 0): ?>
+                        <?php if($_SESSION['Tipo_Persona'] == 1): ?>
                             <p style="color:white;" style="text-align:center">Tipo: Ciudadano</p>
-                        <?php  elseif( $_SESSION['Tipo_cuenta'] == 1 ): ?>
+                        <?php  elseif( $_SESSION['Tipo_Persona'] == 2 ): ?>
                             <p style="color:white;" style="text-align:center">Tipo: Heroe</p>
                         <?php else: ?>
                             <p style="color:white;" style="text-align:center">Tipo: Villano</p>
@@ -77,7 +78,6 @@ $Rnseg = $nseg->fetchAll();
             <li class="dropdown">
                 <a href="#works" class="dropdown-toggle"  data-toggle="dropdown"> Listas de reproducción <span class="caret"></span></a>
             </li>
-            <li><a href="#events">Events</a></li>
             <?php
             if (isset($_SESSION['ID_Cuenta'])): ?>
                 <li><a href="logout.php">Salir</a></li>
@@ -106,8 +106,8 @@ $Rnseg = $nseg->fetchAll();
                                     <div class="profile-header-img">
                                     </div>
                                     <div class="profile-header-info">
-                                        <h4 class="m-t-sm"> Usuario </h4>
-                                        <p class="m-b-sm">Descripcion</p>
+                                        <h4 class="m-t-sm"> <?php echo $_SESSION['username'] ?> </h4>
+                                        <p class="m-b-sm"> <?php echo $_SESSION['Tipo_Persona'] ?> </p>
                                         <p>Seguidores: <?php echo $Rnseg[0]["n"] ?> </p>
 
                                         <a href="#" class="btn btn-xs btn-primary mb-2">Editar mi perfil</a>
