@@ -63,9 +63,16 @@ $Rnseg = $nseg->fetchAll();
                     <!-- NOMBRE DE USUARIO -->
                     <?php if (isset($_SESSION['ID_Cuenta'])): ?>
                     <a href="myprofile.php"><?php echo $_SESSION['username'] ?></a></div></div>
-            <?php else: ?>
-                <li><a href="login.php">Iniciar Sesión</a></li>
-            <?php endif ?>
+                        <?php if($_SESSION['Tipo_cuenta'] == 0): ?>
+                            <p style="color:white;" style="text-align:center">Tipo: Ciudadano</p>
+                        <?php  elseif( $_SESSION['Tipo_cuenta'] == 1 ): ?>
+                            <p style="color:white;" style="text-align:center">Tipo: Heroe</p>
+                        <?php else: ?>
+                            <p style="color:white;" style="text-align:center">Tipo: Villano</p>
+                        <?php endif ?>
+                    <?php else: ?>
+                        <li><a href="login.php">Iniciar Sesión</a></li>
+                    <?php endif ?>
 
             <li class="dropdown">
                 <a href="#works" class="dropdown-toggle"  data-toggle="dropdown"> Listas de reproducción <span class="caret"></span></a>

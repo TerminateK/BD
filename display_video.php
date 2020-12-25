@@ -1,6 +1,8 @@
 <?php
 
 include_once 'Conexion.php';
+session_start();
+
 
 $idvideo = $_GET["id_video"];
 $video = 'SELECT * FROM bd.video WHERE id_video = '.$idvideo.'';
@@ -11,6 +13,55 @@ $resultadoVideo = $mivideo->fetchAll();
 $updvistas = 'UPDATE bd.video SET n_vistas = n_vistas + 1 WHERE video.id_video = '.$idvideo.'';
 $updateV = $pdo->prepare($updvistas);
 $updateV->execute();
+
+
+if (isset($_GET['like'])) {
+    if(isset($_SESSION['ID_Cuenta'])) {
+        $verLike = 'select * from (select @p1:='.$idvideo.', @p2:='.$_SESSION['ID_Cuenta'].') parm , bd.tiene_like;';
+        $verLikes = $pdo->prepare($verLike);
+        $verLikes->execute();
+        $num = $verLikes->fetchAll();
+        if ($num == null) {
+            $crearLike = 'INSERT INTO bd.like (id_cuenta, id_video, tipo_like) values ('.$_SESSION['ID_Cuenta'].', '.$idvideo.', '.$_GET['like'].')';
+            $crear = $pdo->prepare($crearLike);
+            $crear->execute();
+            echo'<script type="text/javascript"> alert("Eleccion guardada");</script>';
+        }
+
+        elseif ($num[0]['tipo_like'] == $_GET['like']) { #Si apreta like/dislike y ya tiene
+            echo'<script type="text/javascript"> alert("No puedes darle like/dislike dos veces!");</script>';
+        }
+        elseif ($num[0]['tipo_like'] != $_GET['like']) { #Cambiar el tipo de like
+            if ($num[0]['tipo_like'] == 0) {
+                $upL = 'UPDATE bd.like SET bd.like.tipo_like = 1 WHERE id_video = '.$idvideo.' and bd.like.id_cuenta = '.$_SESSION['ID_Cuenta'].'';
+                $upLike = $pdo->prepare($upL);
+                $upLike->execute();
+
+
+            }
+            else {
+                $upL = 'UPDATE bd.like SET bd.like.tipo_like = 0 WHERE id_video = '.$idvideo.' and bd.like.id_cuenta = '.$_SESSION['ID_Cuenta'].'';
+                $upLike = $pdo->prepare($upL);
+                $upLike->execute();
+            }
+            echo'<script type="text/javascript"> alert("Has cambiado tu eleccion!");</script>';
+        }
+
+
+    }
+
+}
+
+
+$n_like = 'select count(*) as num from bd.like where bd.like.id_video = '.$idvideo.' and bd.like.tipo_like = 0;';
+$nlikes = $pdo->prepare($n_like);
+$nlikes->execute();
+$numlikes = $nlikes->fetchAll();
+
+$n_dlike = 'select count(*) as num from bd.like where bd.like.id_video = '.$idvideo.' and bd.like.tipo_like = 1;';
+$ndlikes = $pdo->prepare($n_dlike);
+$ndlikes->execute();
+$numdislikes = $ndlikes->fetchAll();
 
 ?>
 
@@ -73,7 +124,15 @@ $updateV->execute();
                 <div class="sidebar-brand">
                     <!-- NOMBRE DE USUARIO -->
                     <?php if (isset($_SESSION['ID_Cuenta'])): ?>
-                    <a href="myprofile.php"><?php echo $_SESSION['username'] ?></a></div></div>
+                        <a href="myprofile.php"><?php echo $_SESSION['username'] ?></a></div></div>
+                        <?php if($_SESSION['Tipo_cuenta'] == 0): ?>
+                            <p style="color:white;" style="text-align:center">Tipo: Ciudadano</p>
+                        <?php  elseif( $_SESSION['Tipo_cuenta'] == 1 ): ?>
+                            <p style="color:white;" style="text-align:center">Tipo: Heroe</p>
+                        <?php else: ?>
+                            <p style="color:white;" style="text-align:center">Tipo: Villano</p>
+                        <?php endif ?>
+
                     <?php else: ?>
                         <li><a href="login.php">Iniciar Sesión</a></li>
                     <?php endif ?>
@@ -103,18 +162,16 @@ $updateV->execute();
         </button>
         <div class="container">
             <div class="row" >
-                <div class="col-4" >
+                <div class="col-6" >
                     <h1><?php echo $resultadoVideo[0]['titulo'] ?></h1>
                     <img class="card-img-top" src="data:image/jpg;base64,<?php echo base64_encode($resultadoVideo[0]['img']) ?>" alt="Card image cap">
-                    <a><?php echo $resultadoVideo[0]['descripcion'] ?></a>
+                    <p><?php echo $resultadoVideo[0]['descripcion'] ?></p>
 
-
-
-                    <button type="button" class="btn btn-outline-secondary">Like</button>
-
-                    <button type="button" class="btn btn-outline-secondary">Dislike</button>
-
-                    <h6>Número de vistas: <?php echo $resultadoVideo[0]['n_vistas'] ?></h6>
+                    <a>Me gusta: <?php echo $numlikes[0]['num']?></a>
+                    <a>- No me gusta: <?php echo $numdislikes[0]['num']?></a>
+                    <button type="button" class="btn btn-success" onClick="location.href='display_video.php?id_video=46&like=0'">Me gusta</button>
+                    <button type="button" class="btn btn-success" onClick="location.href='display_video.php?id_video=46&like=1'">No me gusta</button>
+                    <a>Número de vistas: <?php echo $resultadoVideo[0]['n_vistas'] ?></a>
                 </div>
 
 
