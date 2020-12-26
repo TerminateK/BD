@@ -122,8 +122,6 @@ $persona = $pers->fetchAll();
                                         <p class="m-b-sm"> <?php echo $persona[0]['tipo_persona'] ?> </p>
                                         <p>Seguidores: <?php echo $Rnseg[0]["n"] ?> </p>
 
-                                        <a href="display_video.php?id_video=<?php echo $dato['id_video']?>" class="btn btn-primary">Ver video</a>
-
                                     </div>
                                 </div>
                             </div>

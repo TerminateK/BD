@@ -7,6 +7,6 @@ session_start();
         $consulta = "DELETE FROM video where id_video=  '$id_borrar'";
         $querl = $pdo->prepare($consulta);
         $querl->execute();
-        header('Location:index.php');
+        header('Location:myprofile.php');
     }
 ?>

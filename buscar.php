@@ -21,6 +21,8 @@ $buscarL = $pdo->prepare($busL);
 $buscarL->execute();
 $buscarLista = $buscarL->fetchAll();
 
+
+
 ?>
 
 
@@ -166,6 +168,11 @@ $buscarLista = $buscarL->fetchAll();
                                                     $nseg->execute();
                                                     $Rnseg = $nseg->fetchAll();
                                                     echo $Rnseg[0]["n"]; ?> </a>
+                                                <a href="verperfil.php?id_cuenta=<?php echo $dato['id_cuenta']?>" class="btn btn-primary">Ver perfil</a>
+
+                                                <a href="buscar.php?data=" class="btn btn-success">Seguir</a>
+
+
                                             </div>
                                         </div>
                                     </div>
