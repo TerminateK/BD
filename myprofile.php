@@ -191,8 +191,6 @@ $seguidos = $seguid->fetchAll();
                             <a href="display_video.php?id_video=<?php echo $dato['id_video']?>" class="btn btn-primary">Crear Lista</a>
                         <?php else: ?>
                             <h5 class="card-header">Mis Listas de reproduccion</h5>
-
-
                             <div class="card-body">
                                 <div class="row" >
                                     <div class="col-1"> </div>
