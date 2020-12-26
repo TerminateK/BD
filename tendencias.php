@@ -25,8 +25,6 @@ $top5D->execute();
 $resultadotop5D = $top5D->fetchAll();
 
 
-
-
 ?>
 
 

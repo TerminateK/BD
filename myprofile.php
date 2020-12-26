@@ -7,6 +7,23 @@ $seguidores = 'select p as id, num as n from (select @p1:='.$_SESSION['ID_Cuenta
 $nseg = $pdo->prepare($seguidores);
 $nseg->execute();
 $Rnseg = $nseg->fetchAll();
+
+$video = 'SELECT * FROM bd.video WHERE video.id_cuenta = '.$_SESSION['ID_Cuenta'].' ';
+$mivideo = $pdo->prepare($video);
+$mivideo->execute();
+$resultadoVideo = $mivideo->fetchAll();
+
+$list = 'SELECT * FROM bd.lista_reproduccion WHERE lista_reproduccion.id_cuenta = '.$_SESSION['ID_Cuenta'].' ';
+$lista = $pdo->prepare($list);
+$lista->execute();
+$listaVideo = $lista->fetchAll();
+
+
+$segui = 'SELECT * FROM `bd`.`seguidos` WHERE seguidos.id_cuenta_seguidor = '.$_SESSION['ID_Cuenta'].' ';
+$seguid = $pdo->prepare($segui);
+$seguid->execute();
+$seguidos = $seguid->fetchAll();
+
 ?>
 
 <!doctype html>
@@ -44,9 +61,9 @@ $Rnseg = $nseg->fetchAll();
                     <a class="nav-link enabled" href="subir_imagen.php" tabindex="-1" aria-disabled="false">Subir video</a>
                 </li>
             </ul>
-            <form class="d-flex" method="get" action="buscar.php?">
-                <input class="form-control me-2" name="data"  type="search" placeholder="Search" aria-label="Search">
-                <button href="buscar.php?data=search" class="btn btn-outline-light" type="submit">Buscar</button>
+            <form class="d-flex">
+                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-light" type="submit">Buscar</button>
             </form>
         </div>
     </div>
@@ -117,17 +134,113 @@ $Rnseg = $nseg->fetchAll();
                                             <?php endif ?>
                                         </p>
 
+
+
                                         <p>Seguidores: <?php echo $Rnseg[0]["n"] ?> </p>
 
                                         <a href="#" class="btn btn-xs btn-primary mb-2">Editar mi perfil</a>
+
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    <div class="card">
+                        <?php if($_SESSION['Tipo_cuenta'] == 1): ?>
+
+                        <h5 class="card-header">Mis videos</h5>
+                        <div class="card-body">
+
+                            <div class="row" >
+                                <div class="col-1"> </div>
+                                <?php foreach ($resultadoVideo as $dato): ?>
+                                    <div class="col-2">
+                                        <img class="card-img-top" src="data:image/jpg;base64,<?php echo base64_encode($dato['img']) ?>" alt="Card image cap">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <h5 class="card-title"><?php echo $dato['titulo'] ?></h5>
+                                                <p class="card-text"><?php echo $dato['descripcion'] ?></p>
+                                                <a href="display_video.php?id_video=<?php echo $dato['id_video']?>" class="btn btn-primary">Ver video</a>
+                                                <a href="editar_video.php?id_video=<?php echo $dato['id_video']?>" class="btn btn-success">Editar video</a>
+                                                <a href="editar_video.php?id_video=<?php echo $dato['id_video']?>" class="btn btn-danger">Eliminar video</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                <?php endforeach; ?>
+                            </div>
+                        </div>
+                        <?php else: ?>
+                            <h1>No posees videos, sube uno!</h1>
+                            <a href="subir_imagen.php" class="btn btn-primary">No posees videos, sube uno!</a>
+                        <?php endif ?>
+
+
+                    </div>
+                    <div class="card">
+                        <?php if($listaVideo == null): ?>
+                            <h1>No posees listas de reproduccion, sube una!</h1>
+                            <a href="display_video.php?id_video=<?php echo $dato['id_video']?>" class="btn btn-primary">Crear Lista</a>
+                        <?php else: ?>
+                            <h5 class="card-header">Mis Listas de reproduccion</h5>
+
+
+                            <div class="card-body">
+                                <div class="row" >
+                                    <div class="col-1"> </div>
+                                    <?php foreach ($resultadoVideo as $dato): ?>
+                                        <div class="col-2">
+                                            <img class="card-img-top" src="data:image/jpg;base64,<?php echo base64_encode($dato['img']) ?>" alt="Card image cap">
+                                            <div class="card">
+                                                <div class="card-body">
+                                                    <h5 class="card-title"><?php echo $dato['titulo'] ?></h5>
+                                                    <p class="card-text"><?php echo $dato['descripcion'] ?></p>
+                                                    <a href="display_video.php?id_video=<?php echo $dato['id_video']?>" class="btn btn-primary">Ver video</a>
+                                                    <a href="editar_video?id_video=<?php echo $dato['id_video']?>" class="btn btn-primary">Editar video</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    <?php endforeach; ?>
+                                </div>
+                            </div>
+                        <?php endif ?>
+
+                    </div>
+
+                    <div class="card">
+                        <?php if($seguidos == null): ?>
+                            <h1>No sigues a nadie!</h1>
+                        <?php else: ?>
+                            <h5 class="card-header">Mis seguidos</h5>
+                            <div class="card-body">
+                                <div class="row" >
+                                    <div class="col-1"> </div>
+                                    <?php foreach ($seguidos as $dato): ?>
+                                        <div class="col-2">
+                                            <div class="card">
+                                                <div class="card-body">
+                                                    <h5 class="card-title"><?php echo $dato['titulo'] ?></h5>
+                                                    <p class="card-text"><?php echo $dato['descripcion'] ?></p>
+
+                                                    <form class="d-flex" method="get" action="buscar.php?">
+                                                        <input class="form-control me-2" name="data"  type="search" placeholder="Search" aria-label="Search">
+                                                        <button href="#" class="btn btn-outline-light" type="submit">Buscar</button>
+                                                    </form>
+
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    <?php endforeach; ?>
+                                </div>
+                            </div>
+                        <?php endif ?>
+
+                    </div>
+
                 </div>
             </div>
         </div>
+
     </div>
 
 
