@@ -131,7 +131,7 @@ if(isset($_GET['seguir'])) {
             <?php endif ?>
 
             <li class="dropdown">
-                <a href="#works" class="dropdown-toggle"  data-toggle="dropdown"> Listas de reproducción <span class="caret"></span></a>
+                <a href="mostrarlistas.php?id_cuenta=<?php echo $_SESSION['ID_Cuenta'] ?>" class="dropdown-toggle"  data-toggle="dropdown"> Listas de reproducción <span class="caret"></span></a>
             </li>
             <?php
             if (isset($_SESSION['ID_Cuenta'])): ?>
@@ -170,8 +170,14 @@ if(isset($_GET['seguir'])) {
                                         <?php else: ?>
                                             <p style="color:black;" style="text-align:center">Tipo: Villano</p>
                                         <?php endif ?>
+                                        <p class="m-b-sm">
+                                            <?php if($cuenta[0]['tipo_cuenta'] == 0): ?>
+                                                <p style="color:black;" style="text-align:center">Cuenta normal</p>
+                                            <?php else: ?>
+                                                <p style="color:black;" style="text-align:center">Creador de contenido</p>
+                                            <?php endif ?>
+                                        </p>
                                         <p>Seguidores: <?php echo $Rnseg[0]["n"] ?> </p>
-
                                         <?php if($_SESSION['ID_Cuenta'] != $idcuenta): ?>
 
                                             <?php if($sigue == null): ?>
@@ -265,6 +271,7 @@ if(isset($_GET['seguir'])) {
                                                     <?php else: ?>
                                                         <p style="color:black;" style="text-align:center">Tipo: Villano</p>
                                                     <?php endif ?>
+
                                                     <a href="verperfil.php?id_cuenta=<?php echo $dato['id_cuenta']?>" class="btn btn-primary">Ver perfil</a>
 
 

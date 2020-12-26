@@ -119,6 +119,10 @@ if(isset($_GET['seguir'])) {
             <?php else: ?>
                 <li><a href="login.php">Iniciar Sesión</a></li>
             <?php endif ?>
+            <li class="dropdown">
+                <a href="mostrarlistas.php?id_cuenta=<?php echo $_SESSION['ID_Cuenta'] ?>" class="dropdown-toggle"  data-toggle="dropdown"> Listas de reproducción <span class="caret"></span></a>
+            </li>
+
             <?php
             if (isset($_SESSION['ID_Cuenta'])): ?>
                 <li><a href="logout.php">Salir</a></li>

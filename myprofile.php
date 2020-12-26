@@ -80,20 +80,24 @@ $seguidos = $seguid->fetchAll();
                 <div class="sidebar-brand">
                     <!-- NOMBRE DE USUARIO -->
                     <?php if (isset($_SESSION['ID_Cuenta'])): ?>
-                    <a href="myprofile.php"><?php echo $_SESSION['username'] ?></a></div></div>
-                        <?php if($_SESSION['Tipo_Persona'] == 1): ?>
-                            <p style="color:white;" style="text-align:center">Tipo: Ciudadano</p>
-                        <?php  elseif( $_SESSION['Tipo_Persona'] == 2 ): ?>
-                            <p style="color:white;" style="text-align:center">Tipo: Heroe</p>
-                        <?php else: ?>
-                            <p style="color:white;" style="text-align:center">Tipo: Villano</p>
-                        <?php endif ?>
-                    <?php else: ?>
-                        <li><a href="login.php">Iniciar Sesión</a></li>
-                    <?php endif ?>
+                    <a href="myprofile.php"><?php echo $_SESSION['username'] ?></a>
+                </div>
+            </div>
+            <?php if($_SESSION['Tipo_Persona'] == 1): ?>
+                <p style="color:white;" style="text-align:center">Tipo: Ciudadano</p>
+            <?php  elseif( $_SESSION['Tipo_Persona'] == 2 ): ?>
+                <p style="color:white;" style="text-align:center">Tipo: Heroe</p>
+            <?php else: ?>
+                <p style="color:white;" style="text-align:center">Tipo: Villano</p>
+            <?php endif ?>
 
-            <?php
-            if (isset($_SESSION['ID_Cuenta'])): ?>
+            <?php else: ?>
+                <li><a href="login.php">Iniciar Sesión</a></li>
+            <?php endif ?>
+            <li class="dropdown">
+                <a href="mostrarlistas.php?id_cuenta=<?php echo $_SESSION['ID_Cuenta'] ?>" class="dropdown-toggle"  data-toggle="dropdown"> Listas de reproducción <span class="caret"></span></a>
+            </li>
+            <?php if (isset($_SESSION['ID_Cuenta'])): ?>
                 <li><a href="logout.php">Salir</a></li>
             <?php endif ?>
         </ul>
@@ -130,6 +134,14 @@ $seguidos = $seguid->fetchAll();
                                                 <p style="color:black;" style="text-align:center">Tipo: Villano</p>
                                             <?php endif ?>
                                         </p>
+                                        <p class="m-b-sm">
+                                            <?php if($_SESSION['Tipo_cuenta'] == 0): ?>
+                                                <p style="color:black;" style="text-align:center">Cuenta normal</p>
+                                            <?php else: ?>
+                                                <p style="color:black;" style="text-align:center">Creador de contenido</p>
+                                            <?php endif ?>
+                                        </p>
+
 
 
 

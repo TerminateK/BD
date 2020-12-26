@@ -4,19 +4,35 @@ include_once 'Conexion.php';
 session_start();
 
 
+if(isset ($_GET['id_lista']) ) {
+    $idlista = $_GET['id_lista'];
+    $lis = 'select * from bd.lista_reproduccion where id_lista = ' . $idlista . ';';
+    $list = $pdo->prepare($lis);
+    $list->execute();
+    $listas = $list->fetchAll();
 
-$idlista = $_GET['id_lista'];
+    $vid = 'select * from bd.lista_video where id_lista = ' . $idlista . ';';
+    $vide = $pdo->prepare($vid);
+    $vide->execute();
+    $videos = $vide->fetchAll();
+}
+
+if(isset ($_GET['id_cuenta']) ) {
+    $idcuenta = $_GET['id_cuenta'];
 
 
-$lis = 'select * from bd.lista_reproduccion where id_lista = '.$idlista.';';
-$list = $pdo->prepare($lis);
-$list->execute();
-$listas = $list->fetchAll();
 
-$vid = 'select * from bd.lista_video where id_lista = '.$idlista.';';
-$vide = $pdo->prepare($vid);
-$vide->execute();
-$videos = $vide->fetchAll();
+    $lis = 'select * from bd.lista_reproduccion where id_cuenta = ' . $idcuenta . ';';
+    $list = $pdo->prepare($lis);
+    $list->execute();
+    $listas = $list->fetchAll();
+
+
+    #$vid = 'select * from bd.lista_video where id_lista = ' . $idlista . ';';
+    #$vide = $pdo->prepare($vid);
+    #$vide->execute();
+    #$videos = $vide->fetchAll();
+}
 
 
 ?>
@@ -95,7 +111,7 @@ $videos = $vide->fetchAll();
             <?php endif ?>
 
             <li class="dropdown">
-                <a href="#" class="dropdown-toggle"  data-toggle="dropdown"> Listas de reproducción <span class="caret"></span></a>
+                <a href="mostrarlistas.php?id_cuenta=<?php echo $_SESSION['ID_Cuenta'] ?>" class="dropdown-toggle"  data-toggle="dropdown"> Listas de reproducción <span class="caret"></span></a>
             </li>
             <?php
             if (isset($_SESSION['ID_Cuenta'])): ?>
@@ -116,28 +132,44 @@ $videos = $vide->fetchAll();
             <div class="row">
                 <div class="col-12">
                     <h1>Lista de reproduccion</h1>
-                    <div class="card">
-                        <h5 class="card-header">Videos</h5>
-                        <div class="card-body">
-                            <div class="row" >
-                                <div class="col-1"> </div>
-                                <?php foreach ($topvid as $dato): ?>
-                                    <div class="col-2">
-                                        <img class="card-img-top" src="data:image/jpg;base64,<?php echo base64_encode($dato['img']) ?>" alt="Card image cap">
-                                        <div class="card">
-                                            <div class="card-body">
-                                                <h5 class="card-title"><?php echo $dato['titulo'] ?></h5>
-                                                <p class="card-text"><?php echo $dato['descripcion'] ?></p>
-                                                <p class="card-text" style="font-size:11px"><?php echo $dato['username'] ?></p>
-                                                <a href="display_video.php?id_video=<?php echo $dato['id_video']?>" class="btn btn-primary">Ver video</a>
 
-                                            </div>
+                    <?php if(isset ($_GET['id_cuenta'])):?>
+                        <?php if($listas == null): ?>
+                            <?php echo "No tienes listas de reproduccion" ?>
+                            <a href="crear_lista.php" class="btn btn-primary">Crear Lista</a>
+                        <?php else: ?>
+                            <?php foreach ($listas as $lista): ?>
+                                <?php
+                                $vid = 'select * from bd.lista_video where id_lista = ' . $lista['id_lista'] . ';';
+                                $vide = $pdo->prepare($vid);
+                                $vide->execute();
+                                $videos = $vide->fetchAll(); ?>
+
+                                <div class="card">
+                                    <h5 class="card-header"><?php echo $lista['titulo'] ?></h5>
+                                    <div class="card-body">
+                                        <div class="row" >
+                                            <div class="col-1"> </div>
+                                            <?php foreach ($videos as $video): ?>
+                                                <div class="col-2">
+                                                    <img class="card-img-top" src="data:image/jpg;base64,<?php echo base64_encode($video['img']) ?>" alt="Card image cap">
+                                                    <div class="card">
+                                                        <div class="card-body">
+                                                            <h5 class="card-title"><?php echo $video['titulo'] ?></h5>
+                                                            <p class="card-text"><?php echo $video['descripcion'] ?></p>
+                                                            <p class="card-text" style="font-size:11px"><?php echo $video['username'] ?></p>
+                                                            <a href="display_video.php?id_video=<?php echo $video['id_video']?>" class="btn btn-primary">Ver video</a>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            <?php endforeach; ?>
                                         </div>
                                     </div>
-                                <?php endforeach; ?>
-                            </div>
-                        </div>
-                    </div>
+                                </div>
+                            <?php endforeach; ?>
+                        <?php endif ?>
+                    <?php endif ?>
 
 
                 </div>
