@@ -138,7 +138,7 @@ $seguidos = $seguid->fetchAll();
 
                                         <p>Seguidores: <?php echo $Rnseg[0]["n"] ?> </p>
 
-                                        <a href="#" class="btn btn-xs btn-primary mb-2">Editar mi perfil</a>
+                                        <a href="editar_perfil.php?id_cuenta=<?php $_SESSION['ID_Cuenta'] ?>" class="btn btn-xs btn-primary mb-2">Editar mi perfil</a>
 
                                     </div>
                                 </div>
