@@ -2,17 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6638a861-16ce-4c69-9e0f-971a2f3b31b0" name="Default Changelist" comment="Conexion a base de datos">
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_21-12-2020_15_57__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_21-12-2020_15_57__Default_Changelist_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_21-12-2020_16_08__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_21-12-2020_16_08__Default_Changelist_.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mostrarlistas.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Index.php" beforeDir="false" afterPath="$PROJECT_DIR$/Index.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/comentarios.php" beforeDir="false" afterPath="$PROJECT_DIR$/comentarios.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/buscar.php" beforeDir="false" afterPath="$PROJECT_DIR$/buscar.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/display_video.php" beforeDir="false" afterPath="$PROJECT_DIR$/display_video.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/editar_video.php" beforeDir="false" afterPath="$PROJECT_DIR$/editar_video.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/myprofile.php" beforeDir="false" afterPath="$PROJECT_DIR$/myprofile.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/styleprofile.css" beforeDir="false" afterPath="$PROJECT_DIR$/styleprofile.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/subir_imagen.php" beforeDir="false" afterPath="$PROJECT_DIR$/subir_imagen.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tendencias.php" beforeDir="false" afterPath="$PROJECT_DIR$/tendencias.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/verperfil.php" beforeDir="false" afterPath="$PROJECT_DIR$/verperfil.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -73,6 +67,7 @@
       <workItem from="1608750749136" duration="7830000" />
       <workItem from="1608852776230" duration="42000" />
       <workItem from="1608911110231" duration="3113000" />
+      <workItem from="1609017699542" duration="3393000" />
     </task>
     <task id="LOCAL-00001" summary=".">
       <created>1608407512657</created>
@@ -221,7 +216,14 @@
       <option name="project" value="LOCAL" />
       <updated>1608852807493</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="commit">
+      <created>1608957922880</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1608957922880</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -243,8 +245,8 @@
     <MESSAGE value="Cambios" />
     <MESSAGE value="." />
     <MESSAGE value="Speedrun is real" />
-    <MESSAGE value="commit" />
     <MESSAGE value="Conexion a base de datos" />
-    <option name="LAST_COMMIT_MESSAGE" value="Conexion a base de datos" />
+    <MESSAGE value="commit" />
+    <option name="LAST_COMMIT_MESSAGE" value="commit" />
   </component>
 </project>

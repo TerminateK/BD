@@ -4,7 +4,6 @@ include_once 'Conexion.php';
 session_start();
 
 $data = $_GET["data"];
-
 $busC = 'SELECT * FROM bd.cuenta WHERE bd.cuenta.username LIKE "%'.$data.'%";';
 $buscarC = $pdo->prepare($busC);
 $buscarC->execute();
@@ -89,9 +88,9 @@ if(isset($_GET['seguir'])) {
                     <?php endif ?>
                 </li>
             </ul>
-            <form class="d-flex">
-                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-light" type="submit">Buscar</button>
+            <form class="d-flex" method="get" action="buscar.php?">
+                <input class="form-control me-2" name="data"  type="search" placeholder="Search" aria-label="Search">
+                <button href="buscar.php?data=search" class="btn btn-outline-light" type="submit">Buscar</button>
             </form>
         </div>
     </div>
@@ -124,7 +123,6 @@ if(isset($_GET['seguir'])) {
             <li class="dropdown">
                 <a href="#works" class="dropdown-toggle"  data-toggle="dropdown"> Listas de reproducción <span class="caret"></span></a>
             </li>
-            <li><a href="#events">Events</a></li>
             <?php
             if (isset($_SESSION['ID_Cuenta'])): ?>
                 <li><a href="logout.php">Salir</a></li>
@@ -199,12 +197,13 @@ if(isset($_GET['seguir'])) {
                                                 ?>
 
                                                 <?php if(isset($sigue)): ?>
-                                                    <?php if($sigue == null): ?>
-                                                        <button type="button" class="btn btn-success" onClick="location.href='buscar.php?data=<?php echo $data ?>&id_cuenta=<?php echo $dato['id_cuenta'] ?>&seguir=1'">Seguir</button>
+                                                    <?php if($_SESSION['ID_Cuenta'] != $dato['id_cuenta']): ?>
+                                                        <?php if($sigue == null): ?>
+                                                            <button type="button" class="btn btn-success" onClick="location.href='buscar.php?data=<?php echo $data ?>&id_cuenta=<?php echo $dato['id_cuenta'] ?>&seguir=1'">Seguir</button>
 
-
-                                                    <?php else: ?>
-                                                        <button type="button" class="btn btn-success" onClick="location.href='buscar.php?data=<?php echo $data ?>&id_cuenta=<?php echo $dato['id_cuenta'] ?>&seguir=2'">Dejar de seguir</button>
+                                                        <?php else: ?>
+                                                            <button type="button" class="btn btn-success" onClick="location.href='buscar.php?data=<?php echo $data ?>&id_cuenta=<?php echo $dato['id_cuenta'] ?>&seguir=2'">Dejar de seguir</button>
+                                                        <?php endif ?>
                                                     <?php endif ?>
                                                 <?php endif ?>
 
@@ -218,19 +217,15 @@ if(isset($_GET['seguir'])) {
                     <div class="card">
                         <h5 class="card-header">Listas de reproduccion</h5>
                         <div class="card-body">
-
                             <div class="row" >
                                 <div class="col-1"> </div>
                                 <?php foreach ($buscarLista as $dato): ?>
                                     <div class="col-2">
-                                        <img class="card-img-top" src="data:image/jpg;base64,<?php echo base64_encode($dato['img']) ?>" alt="Card image cap">
                                         <div class="card">
                                             <div class="card-body">
                                                 <h5 class="card-title"><?php echo $dato['titulo'] ?></h5>
-                                                <p class="card-text"><?php echo $dato['descripcion'] ?></p>
-                                                <!--
-                                                display lista reproduccion
-                                                <a href="display_video.php?id_video=<?php echo $dato['id_lista']?>" class="btn btn-primary">Ver video</a>-->
+
+
 
                                             </div>
                                         </div>

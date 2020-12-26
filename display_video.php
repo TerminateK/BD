@@ -10,6 +10,12 @@ $mivideo = $pdo->prepare($video);
 $mivideo->execute();
 $resultadoVideo = $mivideo->fetchAll();
 
+$com = 'SELECT * FROM bd.comentarios WHERE id_video = '.$idvideo.'';
+$come = $pdo->prepare($com);
+$come->execute();
+$comentarios = $come->fetchAll();
+
+
 
 $cuent = 'SELECT * FROM bd.cuenta WHERE id_cuenta = '.$resultadoVideo[0]['id_cuenta'].'';
 $cuen = $pdo->prepare($cuent);
@@ -176,7 +182,9 @@ $numdislikes = $ndlikes->fetchAll();
                     <h1><?php echo $resultadoVideo[0]['titulo'] ?></h1>
                     <img class="card-img-top" src="data:image/jpg;base64,<?php echo base64_encode($resultadoVideo[0]['img']) ?>" alt="Card image cap">
 
-                    <a href="verperfil.php?id_cuenta=<?php echo $cuenta[0]['id_cuenta']?>">  <?php echo $cuenta[0]['username'] ?></a></div></div>
+                    <a href="verperfil.php?id_cuenta=<?php echo $cuenta[0]['id_cuenta']?>">  <?php echo $cuenta[0]['username'] ?></a>
+                </div>
+            </div>
                     <p>Descripcion: <?php echo $resultadoVideo[0]['descripcion'] ?></p>
 
                     <a>Me gusta: <?php echo $numlikes[0]['num']?></a>
@@ -189,7 +197,39 @@ $numdislikes = $ndlikes->fetchAll();
                         <button type="button" class="btn btn-success" onClick="location.href='login.php'">No me gusta</button>
                     <?php endif ?>
                     <a>Número de vistas: <?php echo $resultadoVideo[0]['n_vistas'] ?></a>
+        </div>
+        <div class="card">
+            <?php if($comentarios != null): ?>
+
+                <h5 class="card-header">Comentarios</h5>
+                <div class="card-body">
+
+                    <div class="row" >
+                        <div class="col-1"> </div>
+                        <?php foreach ($comentarios as $dato): ?>
+                            <div class="col-10">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h5 class="card-title"><?php echo $dato['texto'] ?></h5>
+                                        <p class="card-text"><?php echo $dato['fecha_creacion'] ?></p>
+
+                                        <?php if ($dato['id_cuenta'] == $_SESSION['ID_Cuenta']): ?>
+                                            <a href="editar_comentario.php?id_video=<?php echo $dato['id_comentario']?>" class="btn btn-success">Editar comentario</a>
+                                            <a href="eliminar_comentario.php?id_video=<?php echo $dato['id_comentario']?>" class="btn btn-danger">Eliminar comentario</a>
+                                        <?php endif ?>
+                                    </div>
+                                </div>
+                            </div>
+                        <?php endforeach; ?>
+                    </div>
                 </div>
+            <?php else: ?>
+                <h1>No posee comentarios</h1>
+                <a href="crear_comentario.php" class="btn btn-primary">Subir comentario</a>
+            <?php endif ?>
+
+
+        </div>
 
 
             </div>
