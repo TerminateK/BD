@@ -23,6 +23,28 @@ $buscarLista = $buscarL->fetchAll();
 
 
 
+if(isset($_GET['seguir'])) {
+    $seguir = $_GET['seguir'];
+    $idcuenta = $_GET['id_cuenta'];
+
+    if ($seguir == 1) {
+        $insertar = 'INSERT INTO bd.seguidos (id_cuenta_seguidor, id_cuenta_seguida) VALUES ('.$_SESSION['ID_Cuenta'].', '.$idcuenta.')';
+        $insert = $pdo->prepare($insertar);
+        $insert->execute();
+        header("Location: buscar.php?data=$data");
+
+    }
+    else {
+        $del = 'DELETE FROM bd.seguidos WHERE seguidos.id_cuenta_seguidor = '.$_SESSION['ID_Cuenta'].' and seguidos.id_cuenta_seguida ='.$idcuenta.'';
+        $delete = $pdo->prepare($del);
+        $delete->execute();
+        header("Location: buscar.php?data=$data");
+
+    }
+
+}
+
+
 ?>
 
 
@@ -169,9 +191,22 @@ $buscarLista = $buscarL->fetchAll();
                                                     $Rnseg = $nseg->fetchAll();
                                                     echo $Rnseg[0]["n"]; ?> </a>
                                                 <a href="verperfil.php?id_cuenta=<?php echo $dato['id_cuenta']?>" class="btn btn-primary">Ver perfil</a>
+                                                <?php
+                                                $sig = 'SELECT * FROM bd.seguidos where '.$_SESSION['ID_Cuenta'].' = seguidos.id_cuenta_seguidor and '.$dato['id_cuenta'].' = seguidos.id_cuenta_seguida';
+                                                $sigu = $pdo->prepare($sig);
+                                                $sigu->execute();
+                                                $sigue = $sigu->fetchAll();
+                                                ?>
 
-                                                <a href="buscar.php?data=" class="btn btn-success">Seguir</a>
+                                                <?php if(isset($sigue)): ?>
+                                                    <?php if($sigue == null): ?>
+                                                        <button type="button" class="btn btn-success" onClick="location.href='buscar.php?data=<?php echo $data ?>&id_cuenta=<?php echo $dato['id_cuenta'] ?>&seguir=1'">Seguir</button>
 
+
+                                                    <?php else: ?>
+                                                        <button type="button" class="btn btn-success" onClick="location.href='buscar.php?data=<?php echo $data ?>&id_cuenta=<?php echo $dato['id_cuenta'] ?>&seguir=2'">Dejar de seguir</button>
+                                                    <?php endif ?>
+                                                <?php endif ?>
 
                                             </div>
                                         </div>

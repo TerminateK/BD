@@ -19,7 +19,7 @@ $lista->execute();
 $listaVideo = $lista->fetchAll();
 
 
-$segui = 'SELECT * FROM `bd`.`seguidos` WHERE seguidos.id_cuenta_seguidor = '.$_SESSION['ID_Cuenta'].' ';
+$segui = 'SELECT * FROM `bd`.`seguidos`, bd.cuenta WHERE bd.seguidos.id_cuenta_seguidor = '.$_SESSION['ID_Cuenta'].' and bd.cuenta.id_cuenta = bd.seguidos.id_cuenta_seguida ';
 $seguid = $pdo->prepare($segui);
 $seguid->execute();
 $seguidos = $seguid->fetchAll();
@@ -218,7 +218,17 @@ $seguidos = $seguid->fetchAll();
                                         <div class="col-2">
                                             <div class="card">
                                                 <div class="card-body">
-                                                    <h5 class="card-title"><?php echo $dato['titulo'] ?></h5>
+                                                    <h5 href="verperfil.php?id_cuenta=<?php echo $dato['id_cuenta']?>" class="card-title"><?php echo $dato['username'] ?></h5>
+                                                    <?php if($_SESSION['Tipo_Persona'] == 1): ?>
+                                                        <p style="color:black;" style="text-align:center">Tipo: Ciudadano</p>
+                                                    <?php  elseif( $_SESSION['Tipo_Persona'] == 2 ): ?>
+                                                        <p style="color:black;" style="text-align:center">Tipo: Heroe</p>
+                                                    <?php else: ?>
+                                                        <p style="color:black;" style="text-align:center">Tipo: Villano</p>
+                                                    <?php endif ?>
+                                                    <a href="verperfil.php?id_cuenta=<?php echo $dato['id_cuenta']?>" class="btn btn-primary">Ver perfil</a>
+
+
 
 
 

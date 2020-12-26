@@ -3,7 +3,6 @@ include_once 'Conexion.php';
 session_start();
 
 $idcuenta = $_GET["id_cuenta"];
-
 $seguidores = 'select p as id, num as n from (select @p1:='.$idcuenta.' p) parm , bd.n_seguidores;';
 $nseg = $pdo->prepare($seguidores);
 $nseg->execute();
@@ -25,13 +24,25 @@ $sigu->execute();
 $sigue = $sigu->fetchAll();
 
 
-if($_POST) {
-    $insertar  = 'INSERT INTO bd.seguidos (id_cuenta_seguidor, id_cuenta_seguida) VALUES ('.$_SESSION('ID_Cuenta').', '.$idcuenta.')' ;
-    $insert = $pdo->prepare($insertar);
-    $insert->execute();
-    echo 'se inserto';
+if(isset($_GET['seguir'])) {
+    $seguir = $_GET['seguir'];
+    if ($seguir == 1) {
+        $insertar = 'INSERT INTO bd.seguidos (id_cuenta_seguidor, id_cuenta_seguida) VALUES ('.$_SESSION['ID_Cuenta'].', '.$idcuenta.')';
+        $insert = $pdo->prepare($insertar);
+        $insert->execute();
+        header("Location: verperfil.php?id_cuenta=$idcuenta");
+
+    }
+    else {
+        $del = 'DELETE FROM bd.seguidos WHERE seguidos.id_cuenta_seguidor = '.$_SESSION['ID_Cuenta'].' and seguidos.id_cuenta_seguida ='.$idcuenta.'';
+        $delete = $pdo->prepare($del);
+        $delete->execute();
+        header("Location: verperfil.php?id_cuenta=$idcuenta");
+
+    }
 
 }
+
 
 
 ?>
@@ -145,12 +156,11 @@ if($_POST) {
                                         <p>Seguidores: <?php echo $Rnseg[0]["n"] ?> </p>
 
                                         <?php if($sigue == null): ?>
-                                            <form method="post">
-                                                <input class="btn btn-primary" name="seguir"  type="button">
-                                                <button href="verperfil.php?<?php $idcuenta ?>" class="btn btn-primary" >Seguir</button>
-                                            </form>
+                                            <button type="button" class="btn btn-success" onClick="location.href='verperfil.php?id_cuenta=<?php echo $idcuenta ?>&seguir=1'">Seguir</button>
+
+
                                         <?php else: ?>
-                                            <button href="verperfil.php?<?php $idcuenta ?>" class="btn btn-primary" >Dejar de seguir</button>
+                                            <button type="button" class="btn btn-success" onClick="location.href='verperfil.php?id_cuenta=<?php echo $idcuenta ?>&seguir=2'">Dejar de seguir</button>
                                         <?php endif ?>
                                     </div>
                                 </div>
