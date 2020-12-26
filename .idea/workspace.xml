@@ -2,11 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6638a861-16ce-4c69-9e0f-971a2f3b31b0" name="Default Changelist" comment="Conexion a base de datos">
-      <change afterPath="$PROJECT_DIR$/mostrarlistas.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/buscar.php" beforeDir="false" afterPath="$PROJECT_DIR$/buscar.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/display_video.php" beforeDir="false" afterPath="$PROJECT_DIR$/display_video.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/verperfil.php" beforeDir="false" afterPath="$PROJECT_DIR$/verperfil.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -67,7 +64,7 @@
       <workItem from="1608750749136" duration="7830000" />
       <workItem from="1608852776230" duration="42000" />
       <workItem from="1608911110231" duration="3113000" />
-      <workItem from="1609017699542" duration="3393000" />
+      <workItem from="1609017699542" duration="4041000" />
     </task>
     <task id="LOCAL-00001" summary=".">
       <created>1608407512657</created>
@@ -223,7 +220,14 @@
       <option name="project" value="LOCAL" />
       <updated>1608957922880</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="commit">
+      <created>1609021267989</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1609021267989</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

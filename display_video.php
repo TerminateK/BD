@@ -150,17 +150,6 @@ $numdislikes = $ndlikes->fetchAll();
                     <?php else: ?>
                         <li><a href="login.php">Iniciar Sesión</a></li>
                     <?php endif ?>
-            <li class="dropdown">
-                <a href="#works" class="dropdown-toggle"  data-toggle="dropdown"> Listas de reproducción <span class="caret"></span></a>
-                <ul class="dropdown-menu animated fadeInLeft" role="menu">
-                    <div class="dropdown-header">Dropdown heading</div>
-                    <li><a href="#pictures">Pictures</a></li>
-                    <li><a href="#videos">Videeos</a></li>
-                    <li><a href="#books">Books</a></li>
-                    <li><a href="#art">Art</a></li>
-                    <li><a href="#awards">Awards</a></li>
-                </ul>
-            </li>
             <?php
             if (isset($_SESSION['ID_Cuenta'])): ?>
                 <li><a href="logout.php">Salir</a></li>
@@ -180,6 +169,10 @@ $numdislikes = $ndlikes->fetchAll();
             <div class="row" >
                 <div class="col-6" >
                     <h1><?php echo $resultadoVideo[0]['titulo'] ?></h1>
+                    <?php if($_SESSION['ID_Cuenta'] == $cuenta[0]['id_cuenta']): ?>
+                        <a href="editar_video.php?id_video=<?php echo $resultadoVideo[0]['id_video']?>" class="btn btn-success">Editar video</a>
+                        <a href="eliminar_video.php?id_video=<?php echo $resultadoVideo[0]['id_video']?>" class="btn btn-danger">Eliminar video</a>
+                    <?php endif ?>
                     <img class="card-img-top" src="data:image/jpg;base64,<?php echo base64_encode($resultadoVideo[0]['img']) ?>" alt="Card image cap">
 
                     <a href="verperfil.php?id_cuenta=<?php echo $cuenta[0]['id_cuenta']?>">  <?php echo $cuenta[0]['username'] ?></a>
@@ -197,6 +190,8 @@ $numdislikes = $ndlikes->fetchAll();
                         <button type="button" class="btn btn-success" onClick="location.href='login.php'">No me gusta</button>
                     <?php endif ?>
                     <a>Número de vistas: <?php echo $resultadoVideo[0]['n_vistas'] ?></a>
+
+
         </div>
         <div class="card">
             <?php if($comentarios != null): ?>
@@ -205,8 +200,8 @@ $numdislikes = $ndlikes->fetchAll();
                 <div class="card-body">
 
                     <div class="row" >
-                        <div class="col-1"> </div>
                         <?php foreach ($comentarios as $dato): ?>
+                            <div class="col-1"> </div>
                             <div class="col-10">
                                 <div class="card">
                                     <div class="card-body">
@@ -214,18 +209,22 @@ $numdislikes = $ndlikes->fetchAll();
                                         <p class="card-text"><?php echo $dato['fecha_creacion'] ?></p>
 
                                         <?php if ($dato['id_cuenta'] == $_SESSION['ID_Cuenta']): ?>
-                                            <a href="editar_comentario.php?id_video=<?php echo $dato['id_comentario']?>" class="btn btn-success">Editar comentario</a>
-                                            <a href="eliminar_comentario.php?id_video=<?php echo $dato['id_comentario']?>" class="btn btn-danger">Eliminar comentario</a>
+                                            <a href="editar_comentario.php?id_comentario=<?php echo $dato['id_comentario']?>" class="btn btn-success">Editar comentario</a>
+
+                                            <a href="eliminar_comentario.php?id_comentario=<?php echo $dato['id_comentario']?>" class="btn btn-danger">Eliminar comentario</a>
+                                        <?php elseif($_SESSION['ID_Cuenta'] == $cuenta[0]['id_cuenta']): ?>
+                                            <a href="eliminar_comentario.php?id_comentario=<?php echo $dato['id_comentario']?>" class="btn btn-danger">Eliminar comentario</a>
                                         <?php endif ?>
                                     </div>
                                 </div>
                             </div>
                         <?php endforeach; ?>
                     </div>
+                    <a href="crear_comentario.php?id_video=<?php echo $idvideo ?>" class="btn btn-primary">Subir comentario</a>
                 </div>
             <?php else: ?>
                 <h1>No posee comentarios</h1>
-                <a href="crear_comentario.php" class="btn btn-primary">Subir comentario</a>
+                <a href="crear_comentario.php?id_video=<?php echo $idvideo ?>" class="btn btn-primary">Subir comentario</a>
             <?php endif ?>
 
 
