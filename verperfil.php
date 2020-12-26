@@ -19,6 +19,21 @@ $pers = $pdo->prepare($per);
 $pers->execute();
 $persona = $pers->fetchAll();
 
+$sig = 'SELECT * FROM bd.seguidos where '.$_SESSION['ID_Cuenta'].' = seguidos.id_cuenta_seguidor and '.$idcuenta.' = seguidos.id_cuenta_seguida';
+$sigu = $pdo->prepare($sig);
+$sigu->execute();
+$sigue = $sigu->fetchAll();
+
+
+if($_POST) {
+    $insertar  = 'INSERT INTO bd.seguidos (id_cuenta_seguidor, id_cuenta_seguida) VALUES ('.$_SESSION('ID_Cuenta').', '.$idcuenta.')' ;
+    $insert = $pdo->prepare($insertar);
+    $insert->execute();
+    echo 'se inserto';
+
+}
+
+
 ?>
 
 <!doctype html>
@@ -119,9 +134,24 @@ $persona = $pers->fetchAll();
                                     </div>
                                     <div class="profile-header-info">
                                         <h4 class="m-t-sm"> <?php echo $cuenta[0]['username'] ?> </h4>
-                                        <p class="m-b-sm"> <?php echo $persona[0]['tipo_persona'] ?> </p>
+
+                                        <?php if($_SESSION['Tipo_Persona'] == 1): ?>
+                                            <p style="color:black;" style="text-align:center">Tipo: Ciudadano</p>
+                                        <?php  elseif( $_SESSION['Tipo_Persona'] == 2 ): ?>
+                                            <p style="color:black;" style="text-align:center">Tipo: Heroe</p>
+                                        <?php else: ?>
+                                            <p style="color:black;" style="text-align:center">Tipo: Villano</p>
+                                        <?php endif ?>
                                         <p>Seguidores: <?php echo $Rnseg[0]["n"] ?> </p>
 
+                                        <?php if($sigue == null): ?>
+                                            <form method="post">
+                                                <input class="btn btn-primary" name="seguir"  type="button">
+                                                <button href="verperfil.php?<?php $idcuenta ?>" class="btn btn-primary" >Seguir</button>
+                                            </form>
+                                        <?php else: ?>
+                                            <button href="verperfil.php?<?php $idcuenta ?>" class="btn btn-primary" >Dejar de seguir</button>
+                                        <?php endif ?>
                                     </div>
                                 </div>
                             </div>
