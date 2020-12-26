@@ -2,8 +2,22 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6638a861-16ce-4c69-9e0f-971a2f3b31b0" name="Default Changelist" comment="Conexion a base de datos">
+<<<<<<< HEAD
       <change beforePath="$PROJECT_DIR$/buscar.php" beforeDir="false" afterPath="$PROJECT_DIR$/buscar.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/verperfil.php" beforeDir="false" afterPath="$PROJECT_DIR$/verperfil.php" afterDir="false" />
+=======
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_21-12-2020_15_57__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_21-12-2020_15_57__Default_Changelist_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_21-12-2020_16_08__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_21-12-2020_16_08__Default_Changelist_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Index.php" beforeDir="false" afterPath="$PROJECT_DIR$/Index.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/comentarios.php" beforeDir="false" afterPath="$PROJECT_DIR$/comentarios.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/display_video.php" beforeDir="false" afterPath="$PROJECT_DIR$/display_video.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/editar_video.php" beforeDir="false" afterPath="$PROJECT_DIR$/editar_video.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/myprofile.php" beforeDir="false" afterPath="$PROJECT_DIR$/myprofile.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/styleprofile.css" beforeDir="false" afterPath="$PROJECT_DIR$/styleprofile.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/subir_imagen.php" beforeDir="false" afterPath="$PROJECT_DIR$/subir_imagen.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tendencias.php" beforeDir="false" afterPath="$PROJECT_DIR$/tendencias.php" afterDir="false" />
+>>>>>>> 9705f350eae5f5dad98550bcf471e3e8918465a2
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -212,6 +226,7 @@
       <option name="project" value="LOCAL" />
       <updated>1608852807493</updated>
     </task>
+<<<<<<< HEAD
     <task id="LOCAL-00022" summary="Conexion a base de datos">
       <created>1608944339375</created>
       <option name="number" value="00022" />
@@ -227,6 +242,9 @@
       <updated>1608944741765</updated>
     </task>
     <option name="localTasksCounter" value="24" />
+=======
+    <option name="localTasksCounter" value="22" />
+>>>>>>> 9705f350eae5f5dad98550bcf471e3e8918465a2
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
