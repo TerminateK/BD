@@ -4,7 +4,6 @@ include_once 'Conexion.php';
 session_start();
 
 $data = $_GET["data"];
-
 $busC = 'SELECT * FROM bd.cuenta WHERE bd.cuenta.username LIKE "%'.$data.'%";';
 $buscarC = $pdo->prepare($busC);
 $buscarC->execute();
@@ -21,6 +20,28 @@ $buscarL = $pdo->prepare($busL);
 $buscarL->execute();
 $buscarLista = $buscarL->fetchAll();
 
+
+
+if(isset($_GET['seguir'])) {
+    $seguir = $_GET['seguir'];
+    $idcuenta = $_GET['id_cuenta'];
+
+    if ($seguir == 1) {
+        $insertar = 'INSERT INTO bd.seguidos (id_cuenta_seguidor, id_cuenta_seguida) VALUES ('.$_SESSION['ID_Cuenta'].', '.$idcuenta.')';
+        $insert = $pdo->prepare($insertar);
+        $insert->execute();
+        header("Location: buscar.php?data=$data");
+
+    }
+    else {
+        $del = 'DELETE FROM bd.seguidos WHERE seguidos.id_cuenta_seguidor = '.$_SESSION['ID_Cuenta'].' and seguidos.id_cuenta_seguida ='.$idcuenta.'';
+        $delete = $pdo->prepare($del);
+        $delete->execute();
+        header("Location: buscar.php?data=$data");
+
+    }
+
+}
 
 
 ?>
@@ -67,9 +88,9 @@ $buscarLista = $buscarL->fetchAll();
                     <?php endif ?>
                 </li>
             </ul>
-            <form class="d-flex">
-                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-light" type="submit">Buscar</button>
+            <form class="d-flex" method="get" action="buscar.php?">
+                <input class="form-control me-2" name="data"  type="search" placeholder="Search" aria-label="Search">
+                <button href="buscar.php?data=search" class="btn btn-outline-light" type="submit">Buscar</button>
             </form>
         </div>
     </div>
@@ -98,11 +119,10 @@ $buscarLista = $buscarL->fetchAll();
             <?php else: ?>
                 <li><a href="login.php">Iniciar Sesión</a></li>
             <?php endif ?>
-
             <li class="dropdown">
-                <a href="#works" class="dropdown-toggle"  data-toggle="dropdown"> Listas de reproducción <span class="caret"></span></a>
+                <a href="mostrarlistas.php?id_cuenta=<?php echo $_SESSION['ID_Cuenta'] ?>" class="dropdown-toggle"  data-toggle="dropdown"> Listas de reproducción <span class="caret"></span></a>
             </li>
-            <li><a href="#events">Events</a></li>
+
             <?php
             if (isset($_SESSION['ID_Cuenta'])): ?>
                 <li><a href="logout.php">Salir</a></li>
@@ -169,9 +189,23 @@ $buscarLista = $buscarL->fetchAll();
                                                     $Rnseg = $nseg->fetchAll();
                                                     echo $Rnseg[0]["n"]; ?> </a>
                                                 <a href="verperfil.php?id_cuenta=<?php echo $dato['id_cuenta']?>" class="btn btn-primary">Ver perfil</a>
+                                                <?php
+                                                $sig = 'SELECT * FROM bd.seguidos where '.$_SESSION['ID_Cuenta'].' = seguidos.id_cuenta_seguidor and '.$dato['id_cuenta'].' = seguidos.id_cuenta_seguida';
+                                                $sigu = $pdo->prepare($sig);
+                                                $sigu->execute();
+                                                $sigue = $sigu->fetchAll();
+                                                ?>
 
-                                                <a href="buscar.php?data=" class="btn btn-success">Seguir</a>
+                                                <?php if(isset($sigue)): ?>
+                                                    <?php if($_SESSION['ID_Cuenta'] != $dato['id_cuenta']): ?>
+                                                        <?php if($sigue == null): ?>
+                                                            <button type="button" class="btn btn-success" onClick="location.href='buscar.php?data=<?php echo $data ?>&id_cuenta=<?php echo $dato['id_cuenta'] ?>&seguir=1'">Seguir</button>
 
+                                                        <?php else: ?>
+                                                            <button type="button" class="btn btn-success" onClick="location.href='buscar.php?data=<?php echo $data ?>&id_cuenta=<?php echo $dato['id_cuenta'] ?>&seguir=2'">Dejar de seguir</button>
+                                                        <?php endif ?>
+                                                    <?php endif ?>
+                                                <?php endif ?>
 
                                             </div>
                                         </div>
@@ -183,19 +217,15 @@ $buscarLista = $buscarL->fetchAll();
                     <div class="card">
                         <h5 class="card-header">Listas de reproduccion</h5>
                         <div class="card-body">
-
                             <div class="row" >
                                 <div class="col-1"> </div>
                                 <?php foreach ($buscarLista as $dato): ?>
                                     <div class="col-2">
-                                        <img class="card-img-top" src="data:image/jpg;base64,<?php echo base64_encode($dato['img']) ?>" alt="Card image cap">
                                         <div class="card">
                                             <div class="card-body">
                                                 <h5 class="card-title"><?php echo $dato['titulo'] ?></h5>
-                                                <p class="card-text"><?php echo $dato['descripcion'] ?></p>
-                                                <!--
-                                                display lista reproduccion
-                                                <a href="display_video.php?id_video=<?php echo $dato['id_lista']?>" class="btn btn-primary">Ver video</a>-->
+
+
 
                                             </div>
                                         </div>

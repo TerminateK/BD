@@ -3,7 +3,6 @@ include_once 'Conexion.php';
 session_start();
 
 $idcuenta = $_GET["id_cuenta"];
-
 $seguidores = 'select p as id, num as n from (select @p1:='.$idcuenta.' p) parm , bd.n_seguidores;';
 $nseg = $pdo->prepare($seguidores);
 $nseg->execute();
@@ -25,13 +24,42 @@ $sigu->execute();
 $sigue = $sigu->fetchAll();
 
 
-if($_POST) {
-    $insertar  = 'INSERT INTO bd.seguidos (id_cuenta_seguidor, id_cuenta_seguida) VALUES ('.$_SESSION('ID_Cuenta').', '.$idcuenta.')' ;
-    $insert = $pdo->prepare($insertar);
-    $insert->execute();
-    echo 'se inserto';
+$video = 'SELECT * FROM bd.video WHERE video.id_cuenta = '.$idcuenta.' ';
+$mivideo = $pdo->prepare($video);
+$mivideo->execute();
+$resultadoVideo = $mivideo->fetchAll();
+
+$list = 'SELECT * FROM bd.lista_reproduccion WHERE lista_reproduccion.id_cuenta = '.$idcuenta.' ';
+$lista = $pdo->prepare($list);
+$lista->execute();
+$listaVideo = $lista->fetchAll();
+
+
+$segui = 'SELECT * FROM `bd`.`seguidos`, bd.cuenta WHERE bd.seguidos.id_cuenta_seguidor = '.$idcuenta.' and bd.cuenta.id_cuenta = bd.seguidos.id_cuenta_seguida ';
+$seguid = $pdo->prepare($segui);
+$seguid->execute();
+$seguidos = $seguid->fetchAll();
+
+
+if(isset($_GET['seguir'])) {
+    $seguir = $_GET['seguir'];
+    if ($seguir == 1) {
+        $insertar = 'INSERT INTO bd.seguidos (id_cuenta_seguidor, id_cuenta_seguida) VALUES ('.$_SESSION['ID_Cuenta'].', '.$idcuenta.')';
+        $insert = $pdo->prepare($insertar);
+        $insert->execute();
+        header("Location: verperfil.php?id_cuenta=$idcuenta");
+
+    }
+    else {
+        $del = 'DELETE FROM bd.seguidos WHERE seguidos.id_cuenta_seguidor = '.$_SESSION['ID_Cuenta'].' and seguidos.id_cuenta_seguida ='.$idcuenta.'';
+        $delete = $pdo->prepare($del);
+        $delete->execute();
+        header("Location: verperfil.php?id_cuenta=$idcuenta");
+
+    }
 
 }
+
 
 
 ?>
@@ -103,7 +131,7 @@ if($_POST) {
             <?php endif ?>
 
             <li class="dropdown">
-                <a href="#works" class="dropdown-toggle"  data-toggle="dropdown"> Listas de reproducción <span class="caret"></span></a>
+                <a href="mostrarlistas.php?id_cuenta=<?php echo $_SESSION['ID_Cuenta'] ?>" class="dropdown-toggle"  data-toggle="dropdown"> Listas de reproducción <span class="caret"></span></a>
             </li>
             <?php
             if (isset($_SESSION['ID_Cuenta'])): ?>
@@ -142,21 +170,124 @@ if($_POST) {
                                         <?php else: ?>
                                             <p style="color:black;" style="text-align:center">Tipo: Villano</p>
                                         <?php endif ?>
+                                        <p class="m-b-sm">
+                                            <?php if($cuenta[0]['tipo_cuenta'] == 0): ?>
+                                                <p style="color:black;" style="text-align:center">Cuenta normal</p>
+                                            <?php else: ?>
+                                                <p style="color:black;" style="text-align:center">Creador de contenido</p>
+                                            <?php endif ?>
+                                        </p>
                                         <p>Seguidores: <?php echo $Rnseg[0]["n"] ?> </p>
+                                        <?php if($_SESSION['ID_Cuenta'] != $idcuenta): ?>
 
-                                        <?php if($sigue == null): ?>
-                                            <form method="post">
-                                                <input class="btn btn-primary" name="seguir"  type="button">
-                                                <button href="verperfil.php?<?php $idcuenta ?>" class="btn btn-primary" >Seguir</button>
-                                            </form>
+                                            <?php if($sigue == null): ?>
+                                                <button type="button" class="btn btn-success" onClick="location.href='verperfil.php?id_cuenta=<?php echo $idcuenta ?>&seguir=1'">Seguir</button>
+
+
+                                            <?php else: ?>
+                                                <button type="button" class="btn btn-success" onClick="location.href='verperfil.php?id_cuenta=<?php echo $idcuenta ?>&seguir=2'">Dejar de seguir</button>
+                                            <?php endif ?>
+
                                         <?php else: ?>
-                                            <button href="verperfil.php?<?php $idcuenta ?>" class="btn btn-primary" >Dejar de seguir</button>
+                                            <?php echo "Este es tu perfil!" ?>
                                         <?php endif ?>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    <div class="card">
+                        <?php if($cuenta[0]['tipo_cuenta'] == 1): ?>
+
+                            <h5 class="card-header">Videos</h5>
+                            <div class="card-body">
+
+                                <div class="row" >
+                                    <div class="col-1"> </div>
+                                    <?php foreach ($resultadoVideo as $dato): ?>
+                                        <div class="col-2">
+                                            <img class="card-img-top" src="data:image/jpg;base64,<?php echo base64_encode($dato['img']) ?>" alt="Card image cap">
+                                            <div class="card">
+                                                <div class="card-body">
+                                                    <h5 class="card-title"><?php echo $dato['titulo'] ?></h5>
+                                                    <p class="card-text"><?php echo $dato['descripcion'] ?></p>
+                                                    <a href="display_video.php?id_video=<?php echo $dato['id_video']?>" class="btn btn-primary">Ver video</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    <?php endforeach; ?>
+                                </div>
+                            </div>
+                        <?php else: ?>
+                            <h1>No posee videos</h1>
+                        <?php endif ?>
+                    </div>
+                    <div class="card">
+                        <?php if($listaVideo == null): ?>
+                            <h1>No posee listas de reproduccion</h1>
+
+                        <?php else: ?>
+                            <h5 class="card-header">Listas de reproduccion</h5>
+
+
+                            <div class="card-body">
+                                <div class="row" >
+                                    <div class="col-1"> </div>
+                                    <?php foreach ($resultadoVideo as $dato): ?>
+                                        <div class="col-2">
+                                            <img class="card-img-top" src="data:image/jpg;base64,<?php echo base64_encode($dato['img']) ?>" alt="Card image cap">
+                                            <div class="card">
+                                                <div class="card-body">
+                                                    <h5 class="card-title"><?php echo $dato['titulo'] ?></h5>
+                                                    <p class="card-text"><?php echo $dato['descripcion'] ?></p>
+                                                    <a href="display_video.php?id_video=<?php echo $dato['id_video']?>" class="btn btn-primary">Ver video</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    <?php endforeach; ?>
+                                </div>
+                            </div>
+                        <?php endif ?>
+
+                    </div>
+
+                    <div class="card">
+                        <?php if($seguidos == null): ?>
+                            <h1>No sigue a nadie</h1>
+                        <?php else: ?>
+                            <h5 class="card-header">Seguidos</h5>
+                            <div class="card-body">
+                                <div class="row" >
+                                    <div class="col-1"> </div>
+                                    <?php foreach ($seguidos as $dato): ?>
+                                        <div class="col-2">
+                                            <div class="card">
+                                                <div class="card-body">
+                                                    <h5 href="verperfil.php?id_cuenta=<?php echo $dato['id_cuenta']?>" class="card-title"><?php echo $dato['username'] ?></h5>
+                                                    <?php if($_SESSION['Tipo_Persona'] == 1): ?>
+                                                        <p style="color:black;" style="text-align:center">Tipo: Ciudadano</p>
+                                                    <?php  elseif( $_SESSION['Tipo_Persona'] == 2 ): ?>
+                                                        <p style="color:black;" style="text-align:center">Tipo: Heroe</p>
+                                                    <?php else: ?>
+                                                        <p style="color:black;" style="text-align:center">Tipo: Villano</p>
+                                                    <?php endif ?>
+
+                                                    <a href="verperfil.php?id_cuenta=<?php echo $dato['id_cuenta']?>" class="btn btn-primary">Ver perfil</a>
+
+
+
+
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    <?php endforeach; ?>
+                                </div>
+                            </div>
+                        <?php endif ?>
+
+                    </div>
+
                 </div>
             </div>
         </div>
