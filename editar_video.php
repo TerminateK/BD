@@ -81,7 +81,7 @@
 <body>
 <center>
     <?php if(isset($_SESSION['ID_Cuenta'])){?>
-        <form action = '#' method = "POST" enctype="multipart/form-data">
+        <form action = 'myprofile.php' method = "POST" enctype="multipart/form-data">
             <h3> Titulo actual:  <?php echo $query['titulo']; ?></h3>
             <input type="text"  name ="titulo" placeholder="Editar titulo" value=""/>
             <h3> Descripcion actual:  <?php echo $query['descripcion']; ?></h3>

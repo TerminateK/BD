@@ -12,9 +12,7 @@
         $day = date("Y/m/d");
         $valor = 0;
         $agregar->execute(array($titulo,$day,$descripcion,$_SESSION['Tipo_Persona'],$_SESSION['ID_Cuenta'],$valor,$imagen));
-
-
-
+        header('Location:myprofile.php');
     }
 
 

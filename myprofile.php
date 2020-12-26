@@ -61,9 +61,9 @@ $seguidos = $seguid->fetchAll();
                     <a class="nav-link enabled" href="subir_imagen.php" tabindex="-1" aria-disabled="false">Subir video</a>
                 </li>
             </ul>
-            <form class="d-flex">
-                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-light" type="submit">Buscar</button>
+            <form class="d-flex" method="get" action="buscar.php?">
+                <input class="form-control me-2" name="data"  type="search" placeholder="Search" aria-label="Search">
+                <button href="buscar.php?data=search" class="btn btn-outline-light" type="submit">Buscar</button>
             </form>
         </div>
     </div>
@@ -162,7 +162,7 @@ $seguidos = $seguid->fetchAll();
                                                 <p class="card-text"><?php echo $dato['descripcion'] ?></p>
                                                 <a href="display_video.php?id_video=<?php echo $dato['id_video']?>" class="btn btn-primary">Ver video</a>
                                                 <a href="editar_video.php?id_video=<?php echo $dato['id_video']?>" class="btn btn-success">Editar video</a>
-                                                <a href="editar_video.php?id_video=<?php echo $dato['id_video']?>" class="btn btn-danger">Eliminar video</a>
+                                                <a href="eliminar_video.php?id_video=<?php echo $dato['id_video']?>" class="btn btn-danger">Eliminar video</a>
                                             </div>
                                         </div>
                                     </div>
@@ -219,12 +219,7 @@ $seguidos = $seguid->fetchAll();
                                             <div class="card">
                                                 <div class="card-body">
                                                     <h5 class="card-title"><?php echo $dato['titulo'] ?></h5>
-                                                    <p class="card-text"><?php echo $dato['descripcion'] ?></p>
 
-                                                    <form class="d-flex" method="get" action="buscar.php?">
-                                                        <input class="form-control me-2" name="data"  type="search" placeholder="Search" aria-label="Search">
-                                                        <button href="#" class="btn btn-outline-light" type="submit">Buscar</button>
-                                                    </form>
 
 
                                                 </div>
