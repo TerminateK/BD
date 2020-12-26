@@ -161,6 +161,8 @@ $seguidos = $seguid->fetchAll();
                                                 <h5 class="card-title"><?php echo $dato['titulo'] ?></h5>
                                                 <p class="card-text"><?php echo $dato['descripcion'] ?></p>
                                                 <a href="display_video.php?id_video=<?php echo $dato['id_video']?>" class="btn btn-primary">Ver video</a>
+                                                <a href="editar_video.php?id_video=<?php echo $dato['id_video']?>" class="btn btn-success">Editar video</a>
+                                                <a href="editar_video.php?id_video=<?php echo $dato['id_video']?>" class="btn btn-danger">Eliminar video</a>
                                             </div>
                                         </div>
                                     </div>
@@ -193,7 +195,7 @@ $seguidos = $seguid->fetchAll();
                                                     <h5 class="card-title"><?php echo $dato['titulo'] ?></h5>
                                                     <p class="card-text"><?php echo $dato['descripcion'] ?></p>
                                                     <a href="display_video.php?id_video=<?php echo $dato['id_video']?>" class="btn btn-primary">Ver video</a>
-                                                    <a href="display_video.php?id_video=<?php echo $dato['id_video']?>" class="btn btn-primary">Editar video</a>
+                                                    <a href="editar_video?id_video=<?php echo $dato['id_video']?>" class="btn btn-primary">Editar video</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -214,13 +216,17 @@ $seguidos = $seguid->fetchAll();
                                     <div class="col-1"> </div>
                                     <?php foreach ($seguidos as $dato): ?>
                                         <div class="col-2">
-                                            <img class="card-img-top" src="data:image/jpg;base64,<?php echo base64_encode($dato['img']) ?>" alt="Card image cap">
                                             <div class="card">
                                                 <div class="card-body">
                                                     <h5 class="card-title"><?php echo $dato['titulo'] ?></h5>
                                                     <p class="card-text"><?php echo $dato['descripcion'] ?></p>
-                                                    <a href="display_video.php?id_video=<?php echo $dato['id_video']?>" class="btn btn-primary">Ver video</a>
-                                                    <a href="display_video.php?id_video=<?php echo $dato['id_video']?>" class="btn btn-primary">Editar video</a>
+
+                                                    <form class="d-flex" method="get" action="buscar.php?">
+                                                        <input class="form-control me-2" name="data"  type="search" placeholder="Search" aria-label="Search">
+                                                        <button href="#" class="btn btn-outline-light" type="submit">Buscar</button>
+                                                    </form>
+
+
                                                 </div>
                                             </div>
                                         </div>
