@@ -236,6 +236,7 @@ if(isset($_GET['seguir'])) {
                                                 <h5 class="card-title"><?php echo $dato['titulo'] ?></h5>
                                                 <p class="card-text" style="font-size:11px"><?php echo $dato['username'] ?></p>
                                                 <a href="mostrarlistas.php?id_lista=<?php echo $dato['id_lista']?>" class="btn btn-primary">Ver lista</a>
+                                                <a href="seguir_lista.php?id_lista=<?php echo $dato['id_lista']?>" class="btn btn-primary">Seguir lista</a>
                                             </div>
                                         </div>
                                     </div>
