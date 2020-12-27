@@ -3,7 +3,7 @@ include_once ("Conexion.php");
 session_start();
 
 if(isset($_SESSION['ID_Cuenta'])){
-    $cuenta = $_REQUEST['id_cuenta'];
+    $cuenta = $_SESSION['ID_Cuenta'];
     $lista = $_REQUEST['id_lista'];
     $query = $pdo->query("SELECT * FROM seguidos_lista WHERE id_lista = '$lista' and id_cuenta = '$cuenta'")->fetch();
 
