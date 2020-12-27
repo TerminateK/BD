@@ -8,7 +8,7 @@ if(isset($_SESSION['ID_Cuenta'])) {
     $consulta = "DELETE FROM lista_reproduccion where id_lista=  '$id_borrar'";
     $querl = $pdo->prepare($consulta);
     $querl->execute();
-    header("Location:mostrarlista.php?id_cuenta=$id");
+    header("Location:mostrarlistas.php?id_cuenta=$id");
 }
 ?>
 

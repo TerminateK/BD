@@ -66,7 +66,6 @@ if (isset($_GET['like'])) {
 
 }
 
-
 $n_like = 'select count(*) as num from bd.like where bd.like.id_video = '.$idvideo.' and bd.like.tipo_like = 0;';
 $nlikes = $pdo->prepare($n_like);
 $nlikes->execute();
@@ -118,6 +117,14 @@ $numdislikes = $ndlikes->fetchAll();
                         <a class="nav-link enabled" href="login.php" tabindex="-1" aria-disabled="false">Inicie sesión para subir video</a>
                     <?php endif ?>
                 </li>
+                <li class="nav-item">
+                    <?php if (isset($_SESSION['ID_Cuenta'])): ?>
+
+                        <a class="nav-link enabled" href="crear_lista.php" tabindex="-1" aria-disabled="false">Crear Lista</a>
+                    <?php else: ?>
+                        <a class="nav-link enabled" href="login.php" tabindex="-1" aria-disabled="false">Inicie sesión para crear lista</a>
+                    <?php endif ?>
+                </li>
             </ul>
             <form class="d-flex" method="get" action="buscar.php?">
                 <input class="form-control me-2" name="data"  type="search" placeholder="Search" aria-label="Search">
@@ -150,9 +157,11 @@ $numdislikes = $ndlikes->fetchAll();
                     <?php else: ?>
                         <li><a href="login.php">Iniciar Sesión</a></li>
                     <?php endif ?>
-            <li class="dropdown">
-                <a href="mostrarlistas.php?id_cuenta=<?php echo $_SESSION['ID_Cuenta'] ?>" class="dropdown-toggle"  data-toggle="dropdown"> Listas de reproducción <span class="caret"></span></a>
-            </li>
+            <?php if(isset($_SESSION['ID_Cuenta'])): ?>
+                <li class="dropdown">
+                    <a href="mostrarlistas.php?id_cuenta=<?php echo $_SESSION['ID_Cuenta'] ?>" class="dropdown-toggle"  data-toggle="dropdown"> Listas de reproducción <span class="caret"></span></a>
+                </li>
+            <?php endif ?>
             <?php
             if (isset($_SESSION['ID_Cuenta'])): ?>
                 <li><a href="logout.php">Salir</a></li>
@@ -172,6 +181,10 @@ $numdislikes = $ndlikes->fetchAll();
             <div class="row" >
                 <div class="col-6" >
                     <h1><?php echo $resultadoVideo[0]['titulo'] ?></h1>
+                    <?php if(isset($_SESSION['ID_Cuenta'])):?>
+                        <a href="agregar_lista.php?id_video=<?php echo $resultadoVideo[0]['id_video']?>" class="btn btn-light">Agregar a lista</a>
+                    <?php endif ?>
+
                     <?php if($_SESSION['ID_Cuenta'] == $cuenta[0]['id_cuenta']): ?>
                         <a href="editar_video.php?id_video=<?php echo $resultadoVideo[0]['id_video']?>" class="btn btn-success">Editar video</a>
                         <a href="eliminar_video.php?id_video=<?php echo $resultadoVideo[0]['id_video']?>" class="btn btn-danger">Eliminar video</a>

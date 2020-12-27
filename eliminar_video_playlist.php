@@ -8,7 +8,7 @@
         $consulta = "DELETE FROM lista_video where id_lista='$lista' and id_video = '$video'  ";
         $querl = $pdo->prepare($consulta);
         $querl->execute();
-        //header("Location:mostrarlistas.php?id_video=$lista");
+        header("Location:mostrarlistas.php?id_lista=$lista");
 
     }
 

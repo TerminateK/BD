@@ -14,24 +14,15 @@ if(isset ($_GET['id_lista']) ) {
     $vid = 'select * from bd.lista_video where id_lista = ' . $idlista . ';';
     $vide = $pdo->prepare($vid);
     $vide->execute();
-    $videos = $vide->fetchAll();
+    $buscarListas = $vide->fetchAll();
 }
 
 if(isset ($_GET['id_cuenta']) ) {
     $idcuenta = $_GET['id_cuenta'];
-
-
-
     $lis = 'select * from bd.lista_reproduccion where id_cuenta = ' . $idcuenta . ';';
     $list = $pdo->prepare($lis);
     $list->execute();
     $listas = $list->fetchAll();
-
-
-    #$vid = 'select * from bd.lista_video where id_lista = ' . $idlista . ';';
-    #$vide = $pdo->prepare($vid);
-    #$vide->execute();
-    #$videos = $vide->fetchAll();
 }
 
 
@@ -77,6 +68,14 @@ if(isset ($_GET['id_cuenta']) ) {
                         <a class="nav-link enabled" href="login.php" tabindex="-1" aria-disabled="false">Inicie sesión para subir video</a>
                     <?php endif ?>
                 </li>
+                <li class="nav-item">
+                    <?php if (isset($_SESSION['ID_Cuenta'])): ?>
+
+                        <a class="nav-link enabled" href="crear_lista.php" tabindex="-1" aria-disabled="false">Crear Lista</a>
+                    <?php else: ?>
+                        <a class="nav-link enabled" href="login.php" tabindex="-1" aria-disabled="false">Inicie sesión para crear lista</a>
+                    <?php endif ?>
+                </li>
             </ul>
             <form class="d-flex" method="get" action="buscar.php?">
                 <input class="form-control me-2" name="data"  type="search" placeholder="Search" aria-label="Search">
@@ -110,9 +109,11 @@ if(isset ($_GET['id_cuenta']) ) {
                 <li><a href="login.php">Iniciar Sesión</a></li>
             <?php endif ?>
 
-            <li class="dropdown">
-                <a href="mostrarlistas.php?id_cuenta=<?php echo $_SESSION['ID_Cuenta'] ?>" class="dropdown-toggle"  data-toggle="dropdown"> Listas de reproducción <span class="caret"></span></a>
-            </li>
+            <?php if(isset($_SESSION['ID_Cuenta'])): ?>
+                <li class="dropdown">
+                    <a href="mostrarlistas.php?id_cuenta=<?php echo $_SESSION['ID_Cuenta'] ?>" class="dropdown-toggle"  data-toggle="dropdown"> Listas de reproducción <span class="caret"></span></a>
+                </li>
+            <?php endif ?>
             <?php
             if (isset($_SESSION['ID_Cuenta'])): ?>
                 <li><a href="logout.php">Salir</a></li>
@@ -131,9 +132,9 @@ if(isset ($_GET['id_cuenta']) ) {
         <div class="container">
             <div class="row">
                 <div class="col-12">
-                    <h1>Lista de reproduccion</h1>
 
                     <?php if(isset ($_GET['id_cuenta'])):?>
+                        <h1>Mis listas de reproduccion</h1>
                         <?php if($listas == null): ?>
                             <?php echo "No tienes listas de reproduccion" ?>
                             <a href="crear_lista.php" class="btn btn-primary">Crear Lista</a>
@@ -143,35 +144,83 @@ if(isset ($_GET['id_cuenta']) ) {
                                 $vid = 'select * from bd.lista_video where id_lista = ' . $lista['id_lista'] . ';';
                                 $vide = $pdo->prepare($vid);
                                 $vide->execute();
-                                $videos = $vide->fetchAll(); ?>
+                                $buscarListas = $vide->fetchAll(); ?>
 
                                 <div class="card">
                                     <h5 class="card-header"><?php echo $lista['titulo'] ?></h5>
                                     <div class="card-body">
                                         <div class="row" >
                                             <div class="col-1"> </div>
-                                            <?php foreach ($videos as $video): ?>
-                                                <div class="col-2">
-                                                    <img class="card-img-top" src="data:image/jpg;base64,<?php echo base64_encode($video['img']) ?>" alt="Card image cap">
-                                                    <div class="card">
-                                                        <div class="card-body">
-                                                            <h5 class="card-title"><?php echo $video['titulo'] ?></h5>
-                                                            <p class="card-text"><?php echo $video['descripcion'] ?></p>
-                                                            <p class="card-text" style="font-size:11px"><?php echo $video['username'] ?></p>
-                                                            <a href="display_video.php?id_video=<?php echo $video['id_video']?>" class="btn btn-primary">Ver video</a>
+                                            <?php foreach ($buscarListas as $blista): ?>
+                                                <?php
+                                                $bvid = 'select * from bd.video, bd.cuenta where video.id_video = ' . $blista['id_video'] . ' and video.id_cuenta = cuenta.id_cuenta;';
+                                                $bvide = $pdo->prepare($bvid);
+                                                $bvide->execute();
+                                                $videoDisplay = $bvide->fetchAll();
+                                                ?>
+                                                <?php foreach ($videoDisplay as $vid): ?>
+                                                    <div class="col-2">
+                                                        <img class="card-img-top" src="data:image/jpg;base64,<?php echo base64_encode($vid['img']) ?>" alt="Card image cap">
+                                                        <div class="card">
+                                                            <div class="card-body">
+                                                                <h5 class="card-title"><?php echo $vid['titulo'] ?></h5>
+                                                                <p class="card-text"><?php echo $vid['descripcion'] ?></p>
+                                                                <p class="card-text" style="font-size:11px"><?php echo $vid['username'] ?></p>
+                                                                <a href="display_video.php?id_video=<?php echo $vid['id_video']?>" class="btn btn-primary">Ver video</a>
+                                                                <a href="eliminar_video_playlist.php?id_video=<?php echo $vid['id_video'] ?>&id_lista=<?php echo $blista['id_lista'] ?>" class="btn btn-danger">Eliminar de esta lista</a>
 
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                </div>
+                                                <?php endforeach; ?>
                                             <?php endforeach; ?>
                                         </div>
                                     </div>
                                 </div>
+                                <a href="mostrarlistas.php?id_lista=<?php echo $lista['id_lista']?>" class="btn btn-primary">Ver lista</a>
+                                <a href="editar_lista.php?id_lista=<?php echo $lista['id_lista']?>" class="btn btn-success">Editar lista</a>
+                                <a href="eliminar_lista.php?id_lista=<?php echo $lista['id_lista']?>" class="btn btn-danger">Eliminar lista</a>
                             <?php endforeach; ?>
                         <?php endif ?>
+
+                    <?php elseif (isset ($_GET['id_lista'])): ?>
+                        <h1>Lista de reproduccion</h1>
+                        <?php $idlista = $_GET['id_lista']; ?>
+                        <div class="card">
+                            <h5 class="card-header"><?php echo $listas[0]['titulo'] ?></h5>
+                            <div class="card-body">
+                                <div class="row" >
+                                    <div class="col-1"> </div>
+                                    <?php foreach ($buscarListas as $blista): ?>
+                                        <?php
+                                        $bvid = 'select * from bd.video, bd.cuenta where video.id_video = ' . $blista['id_video'] . ' and video.id_cuenta = cuenta.id_cuenta;';
+                                        $bvide = $pdo->prepare($bvid);
+                                        $bvide->execute();
+                                        $videoDisplay = $bvide->fetchAll();
+                                        ?>
+                                        <?php foreach ($videoDisplay as $vid): ?>
+                                        <div class="col-2">
+                                            <img class="card-img-top" src="data:image/jpg;base64,<?php echo base64_encode($vid['img']) ?>" alt="Card image cap">
+                                            <div class="card">
+                                                <div class="card-body">
+                                                    <h5 class="card-title"><?php echo $vid['titulo'] ?></h5>
+                                                    <p class="card-text"><?php echo $vid['descripcion'] ?></p>
+                                                    <p class="card-text" style="font-size:11px"><?php echo $vid['username'] ?></p>
+                                                    <a href="display_video.php?id_video=<?php echo $vid['id_video']?>" class="btn btn-primary">Ver video</a>
+                                                    <a href="eliminar_video_playlist.php?id_video=<?php echo $vid['id_video'] ?>&id_lista=<?php echo $blista['id_lista'] ?>" class="btn btn-danger">Eliminar de esta lista</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <?php endforeach; ?>
+                                    <?php endforeach; ?>
+                                </div>
+                            </div>
+                        </div>
+                        <?php if($_SESSION['ID_Cuenta'] == $listas[0]['id_cuenta']): ?>
+                            <a href="editar_lista.php?id_lista=<?php echo $listas[0]['id_lista']?>" class="btn btn-success">Editar lista</a>
+                            <a href="eliminar_lista.php?id_lista=<?php echo $listas[0]['id_lista']?>" class="btn btn-danger">Eliminar lista</a>
+                        <?php endif; ?>
                     <?php endif ?>
-
-
                 </div>
             </div>
         </div>
