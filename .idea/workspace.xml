@@ -2,8 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6638a861-16ce-4c69-9e0f-971a2f3b31b0" name="Default Changelist" comment="Conexion a base de datos">
+      <change afterPath="$PROJECT_DIR$/agregar_lista.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Index.php" beforeDir="false" afterPath="$PROJECT_DIR$/Index.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/buscar.php" beforeDir="false" afterPath="$PROJECT_DIR$/buscar.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/crear_lista.php" beforeDir="false" afterPath="$PROJECT_DIR$/crear_lista.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/display_video.php" beforeDir="false" afterPath="$PROJECT_DIR$/display_video.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/eliminar_lista.php" beforeDir="false" afterPath="$PROJECT_DIR$/eliminar_lista.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mostrarlistas.php" beforeDir="false" afterPath="$PROJECT_DIR$/mostrarlistas.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/myprofile.php" beforeDir="false" afterPath="$PROJECT_DIR$/myprofile.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tendencias.php" beforeDir="false" afterPath="$PROJECT_DIR$/tendencias.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/verperfil.php" beforeDir="false" afterPath="$PROJECT_DIR$/verperfil.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -64,7 +73,7 @@
       <workItem from="1608750749136" duration="7830000" />
       <workItem from="1608852776230" duration="42000" />
       <workItem from="1608911110231" duration="3113000" />
-      <workItem from="1609017699542" duration="8034000" />
+      <workItem from="1609017699542" duration="14180000" />
     </task>
     <task id="LOCAL-00001" summary=".">
       <created>1608407512657</created>
@@ -241,7 +250,14 @@
       <option name="project" value="LOCAL" />
       <updated>1609025586214</updated>
     </task>
-    <option name="localTasksCounter" value="26" />
+    <task id="LOCAL-00026" summary="commit">
+      <created>1609026241554</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1609026241554</updated>
+    </task>
+    <option name="localTasksCounter" value="27" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

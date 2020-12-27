@@ -49,7 +49,17 @@ $topvid = $top10->fetchAll();
                             <a class="nav-link enabled" href="login.php" tabindex="-1" aria-disabled="false">Inicie sesión para subir video</a>
                         <?php endif ?>
                     </li>
+                    <li class="nav-item">
+                        <?php if (isset($_SESSION['ID_Cuenta'])): ?>
+
+                            <a class="nav-link enabled" href="crear_lista.php" tabindex="-1" aria-disabled="false">Crear Lista</a>
+                        <?php else: ?>
+                            <a class="nav-link enabled" href="login.php" tabindex="-1" aria-disabled="false">Inicie sesión para crear lista</a>
+                        <?php endif ?>
+                    </li>
                 </ul>
+
+
                 <form class="d-flex" method="get" action="buscar.php?">
                     <input class="form-control me-2" name="data"  type="search" placeholder="Search" aria-label="Search">
                     <button href="buscar.php?data=search" class="btn btn-outline-light" type="submit">Buscar</button>
@@ -81,10 +91,11 @@ $topvid = $top10->fetchAll();
                         <?php else: ?>
                             <li><a href="login.php">Iniciar Sesión</a></li>
                         <?php endif ?>
-                <li class="dropdown">
-                    <a href="mostrarlistas.php?id_cuenta=<?php echo $_SESSION['ID_Cuenta'] ?>" class="dropdown-toggle"  data-toggle="dropdown"> Listas de reproducción <span class="caret"></span></a>
-                </li>
-
+                <?php if(isset($_SESSION['ID_Cuenta'])): ?>
+                    <li class="dropdown">
+                        <a href="mostrarlistas.php?id_cuenta=<?php echo $_SESSION['ID_Cuenta'] ?>" class="dropdown-toggle"  data-toggle="dropdown"> Listas de reproducción <span class="caret"></span></a>
+                    </li>
+                <?php endif ?>
                 <?php
                 if (isset($_SESSION['ID_Cuenta'])): ?>
                     <li><a href="logout.php">Salir</a></li>

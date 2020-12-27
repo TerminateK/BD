@@ -23,6 +23,9 @@ if($_POST) {
 <!DOCTYPE html>
 <html>
 <head>
+
+</head>
+
 <body>
 <center>
     <?php if(isset($_SESSION['ID_Cuenta'])){?>
@@ -44,5 +47,4 @@ if($_POST) {
     ?>
 </center>
 </body>
-</head>
 </html>

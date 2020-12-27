@@ -15,7 +15,7 @@ $buscarV = $pdo->prepare($busV);
 $buscarV->execute();
 $buscarVideos = $buscarV->fetchAll();
 
-$busL = 'SELECT * FROM bd.lista_reproduccion WHERE bd.lista_reproduccion.titulo LIKE "%'.$data.'%";';
+$busL = 'SELECT * FROM bd.lista_reproduccion, bd.cuenta WHERE bd.lista_reproduccion.titulo LIKE "%'.$data.'%" and bd.cuenta.id_cuenta = bd.lista_reproduccion.id_cuenta;';
 $buscarL = $pdo->prepare($busL);
 $buscarL->execute();
 $buscarLista = $buscarL->fetchAll();
@@ -87,6 +87,14 @@ if(isset($_GET['seguir'])) {
                         <a class="nav-link enabled" href="login.php" tabindex="-1" aria-disabled="false">Inicie sesión para subir video</a>
                     <?php endif ?>
                 </li>
+                <li class="nav-item">
+                    <?php if (isset($_SESSION['ID_Cuenta'])): ?>
+
+                        <a class="nav-link enabled" href="crear_lista.php" tabindex="-1" aria-disabled="false">Crear Lista</a>
+                    <?php else: ?>
+                        <a class="nav-link enabled" href="login.php" tabindex="-1" aria-disabled="false">Inicie sesión para crear lista</a>
+                    <?php endif ?>
+                </li>
             </ul>
             <form class="d-flex" method="get" action="buscar.php?">
                 <input class="form-control me-2" name="data"  type="search" placeholder="Search" aria-label="Search">
@@ -119,9 +127,11 @@ if(isset($_GET['seguir'])) {
             <?php else: ?>
                 <li><a href="login.php">Iniciar Sesión</a></li>
             <?php endif ?>
-            <li class="dropdown">
-                <a href="mostrarlistas.php?id_cuenta=<?php echo $_SESSION['ID_Cuenta'] ?>" class="dropdown-toggle"  data-toggle="dropdown"> Listas de reproducción <span class="caret"></span></a>
-            </li>
+            <?php if(isset($_SESSION['ID_Cuenta'])): ?>
+                <li class="dropdown">
+                    <a href="mostrarlistas.php?id_cuenta=<?php echo $_SESSION['ID_Cuenta'] ?>" class="dropdown-toggle"  data-toggle="dropdown"> Listas de reproducción <span class="caret"></span></a>
+                </li>
+            <?php endif ?>
 
             <?php
             if (isset($_SESSION['ID_Cuenta'])): ?>
@@ -224,9 +234,8 @@ if(isset($_GET['seguir'])) {
                                         <div class="card">
                                             <div class="card-body">
                                                 <h5 class="card-title"><?php echo $dato['titulo'] ?></h5>
-
-
-
+                                                <p class="card-text" style="font-size:11px"><?php echo $dato['username'] ?></p>
+                                                <a href="mostrarlistas.php?id_lista=<?php echo $dato['id_lista']?>" class="btn btn-primary">Ver lista</a>
                                             </div>
                                         </div>
                                     </div>

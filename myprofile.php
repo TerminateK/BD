@@ -60,6 +60,14 @@ $seguidos = $seguid->fetchAll();
                 <li class="nav-item">
                     <a class="nav-link enabled" href="subir_imagen.php" tabindex="-1" aria-disabled="false">Subir video</a>
                 </li>
+                <li class="nav-item">
+                    <?php if (isset($_SESSION['ID_Cuenta'])): ?>
+
+                        <a class="nav-link enabled" href="crear_lista.php" tabindex="-1" aria-disabled="false">Crear Lista</a>
+                    <?php else: ?>
+                        <a class="nav-link enabled" href="login.php" tabindex="-1" aria-disabled="false">Inicie sesión para crear lista</a>
+                    <?php endif ?>
+                </li>
             </ul>
             <form class="d-flex" method="get" action="buscar.php?">
                 <input class="form-control me-2" name="data"  type="search" placeholder="Search" aria-label="Search">
@@ -94,9 +102,11 @@ $seguidos = $seguid->fetchAll();
             <?php else: ?>
                 <li><a href="login.php">Iniciar Sesión</a></li>
             <?php endif ?>
-            <li class="dropdown">
-                <a href="mostrarlistas.php?id_cuenta=<?php echo $_SESSION['ID_Cuenta'] ?>" class="dropdown-toggle"  data-toggle="dropdown"> Listas de reproducción <span class="caret"></span></a>
-            </li>
+            <?php if(isset($_SESSION['ID_Cuenta'])): ?>
+                <li class="dropdown">
+                    <a href="mostrarlistas.php?id_cuenta=<?php echo $_SESSION['ID_Cuenta'] ?>" class="dropdown-toggle"  data-toggle="dropdown"> Listas de reproducción <span class="caret"></span></a>
+                </li>
+            <?php endif ?>
             <?php if (isset($_SESSION['ID_Cuenta'])): ?>
                 <li><a href="logout.php">Salir</a></li>
             <?php endif ?>
@@ -193,24 +203,41 @@ $seguidos = $seguid->fetchAll();
                             <h5 class="card-header">Mis Listas de reproduccion</h5>
                             <div class="card-body">
                                 <div class="row" >
-                                    <div class="col-1"> </div>
-                                    <?php foreach ($resultadoVideo as $dato): ?>
-                                        <div class="col-2">
-                                            <img class="card-img-top" src="data:image/jpg;base64,<?php echo base64_encode($dato['img']) ?>" alt="Card image cap">
-                                            <div class="card">
-                                                <div class="card-body">
-                                                    <h5 class="card-title"><?php echo $dato['titulo'] ?></h5>
-                                                    <p class="card-text"><?php echo $dato['descripcion'] ?></p>
-                                                    <a href="display_video.php?id_video=<?php echo $dato['id_video']?>" class="btn btn-primary">Ver video</a>
-                                                    <a href="editar_video?id_video=<?php echo $dato['id_video']?>" class="btn btn-primary">Editar video</a>
-                                                </div>
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <div class="row" >
+                                                <div class="col-1"> </div>
+                                                <?php foreach ($listaVideo as $lista): ?>
+                                                    <?php
+                                                    $vid = 'select * from bd.lista_video where id_lista = ' . $lista['id_lista'] . ';';
+                                                    $vide = $pdo->prepare($vid);
+                                                    $vide->execute();
+                                                    $videos = $vide->fetchAll();
+                                                    ?>
+                                                    <h5 class="card-header"><?php echo $lista['titulo'] ?></h5>
+                                                    <?php foreach ($videos as $video): ?>
+                                                        <div class="col-2">
+                                                            <img class="card-img-top" src="data:image/jpg;base64,<?php echo base64_encode($dato['img']) ?>" alt="Card image cap">
+                                                            <div class="card">
+                                                                <div class="card-body">
+                                                                    <h5 class="card-title"><?php echo $video['titulo'] ?></h5>
+                                                                    <p class="card-text"><?php echo $video['descripcion'] ?></p>
+                                                                    <a href="display_video.php?id_video=<?php echo $video['id_video']?>" class="btn btn-primary">Ver video</a>
+                                                                    <a href="editar_video?id_video=<?php echo $video['id_video']?>" class="btn btn-primary">Editar video</a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    <?php endforeach; ?>
+                                                <?php endforeach; ?>
                                             </div>
+                                            <a href="mostrarlistas.php?id_lista=<?php echo $lista['id_lista']?>" class="btn btn-primary">Ver lista</a>
+                                            <a href="editar_lista.php?id_lista=<?php echo $lista['id_lista']?>" class="btn btn-success">Editar lista</a>
+                                            <a href="eliminar_lista.php?id_lista=<?php echo $lista['id_lista']?>" class="btn btn-danger">Eliminar lista</a>
                                         </div>
-                                    <?php endforeach; ?>
+                                    </div>
                                 </div>
                             </div>
                         <?php endif ?>
-
                     </div>
 
                     <div class="card">
