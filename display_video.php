@@ -47,7 +47,7 @@ if (isset($_GET['like'])) {
         }
         elseif ($num[0]['tipo_like'] != $_GET['like']) { #Cambiar el tipo de like
             if ($num[0]['tipo_like'] == 0) {
-                $upL = 'UPDATE bd.like SET bd.like.tipo_like = 1 WHERE id_video = '.$idvideo.' and bd.like.id_cuenta = '.$_SESSION['ID_Cuenta'].'';
+                $upL = 'UPDATE bd.like SET bd.like.tipo_like = 1 WHERE bd.like.id_video = '.$idvideo.' and bd.like.id_cuenta = '.$_SESSION['ID_Cuenta'].'';
                 $upLike = $pdo->prepare($upL);
                 $upLike->execute();
 
