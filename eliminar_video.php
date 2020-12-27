@@ -16,6 +16,7 @@ session_start();
             $consulta3 = "UPDATE bd.cuenta SET bd.cuenta.tipo_cuenta = 0 WHERE bd.cuenta.id_cuenta ='$id'";
             $resultado3 = $pdo->prepare($consulta3);
             $resultado3->execute();
+            $_SESSION['Tipo_cuenta'] = 0;
             header('Location:myprofile.php');
         }
 

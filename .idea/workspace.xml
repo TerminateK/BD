@@ -2,8 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6638a861-16ce-4c69-9e0f-971a2f3b31b0" name="Default Changelist" comment="Conexion a base de datos">
+      <change afterPath="$PROJECT_DIR$/editar_lista.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/crear_lista.php" beforeDir="false" afterPath="$PROJECT_DIR$/crear_lista.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/agregar_video_playlist.php" beforeDir="false" afterPath="$PROJECT_DIR$/agregar_video_playlist.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/eliminar_video.php" beforeDir="false" afterPath="$PROJECT_DIR$/eliminar_video.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/subir_imagen.php" beforeDir="false" afterPath="$PROJECT_DIR$/subir_imagen.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
