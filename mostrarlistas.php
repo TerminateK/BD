@@ -167,6 +167,7 @@ if(isset ($_GET['id_cuenta']) ) {
                                                                 <p class="card-text"><?php echo $vid['descripcion'] ?></p>
                                                                 <p class="card-text" style="font-size:11px"><?php echo $vid['username'] ?></p>
                                                                 <a href="display_video.php?id_video=<?php echo $vid['id_video']?>" class="btn btn-primary">Ver video</a>
+                                                                <a href="eliminar_video_playlist.php?id_video=<?php echo $vid['id_video'] ?>&id_lista=<?php echo $blista['id_lista'] ?>" class="btn btn-danger">Eliminar de esta lista</a>
 
                                                             </div>
                                                         </div>
@@ -206,7 +207,7 @@ if(isset ($_GET['id_cuenta']) ) {
                                                     <p class="card-text"><?php echo $vid['descripcion'] ?></p>
                                                     <p class="card-text" style="font-size:11px"><?php echo $vid['username'] ?></p>
                                                     <a href="display_video.php?id_video=<?php echo $vid['id_video']?>" class="btn btn-primary">Ver video</a>
-
+                                                    <a href="eliminar_video_playlist.php?id_video=<?php echo $vid['id_video'] ?>&id_lista=<?php echo $blista['id_lista'] ?>" class="btn btn-danger">Eliminar de esta lista</a>
                                                 </div>
                                             </div>
                                         </div>
