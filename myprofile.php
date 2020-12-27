@@ -24,6 +24,13 @@ $seguid = $pdo->prepare($segui);
 $seguid->execute();
 $seguidos = $seguid->fetchAll();
 
+
+$pseg = 'SELECT * FROM bd.seguidos_lista, bd.lista_reproduccion WHERE seguidos_lista.id_cuenta = '.$_SESSION['ID_Cuenta'].' and lista_reproduccion.id_lista = seguidos_lista.id_lista ';
+$psegu = $pdo->prepare($pseg);
+$psegu->execute();
+$pseguidos = $psegu->fetchAll();
+
+
 ?>
 
 <!doctype html>
@@ -228,11 +235,11 @@ $seguidos = $seguid->fetchAll();
                                                             </div>
                                                         </div>
                                                     <?php endforeach; ?>
+                                                    <a href="mostrarlistas.php?id_lista=<?php echo $lista['id_lista']?>" class="btn btn-primary">Ver lista</a>
+                                                    <a href="editar_lista.php?id_lista=<?php echo $lista['id_lista']?>" class="btn btn-success">Editar lista</a>
+                                                    <a href="eliminar_lista.php?id_lista=<?php echo $lista['id_lista']?>" class="btn btn-danger">Eliminar lista</a>
                                                 <?php endforeach; ?>
                                             </div>
-                                            <a href="mostrarlistas.php?id_lista=<?php echo $lista['id_lista']?>" class="btn btn-primary">Ver lista</a>
-                                            <a href="editar_lista.php?id_lista=<?php echo $lista['id_lista']?>" class="btn btn-success">Editar lista</a>
-                                            <a href="eliminar_lista.php?id_lista=<?php echo $lista['id_lista']?>" class="btn btn-danger">Eliminar lista</a>
                                         </div>
                                     </div>
                                 </div>
@@ -274,6 +281,28 @@ $seguidos = $seguid->fetchAll();
                             </div>
                         <?php endif ?>
 
+                    </div>
+                    <div class="card">
+                        <?php if($pseguidos == null): ?>
+                            <h1>No sigues ninguna playlist</h1>
+                        <?php else: ?>
+                            <h5 class="card-header">Listas de reproduccion seguidas</h5>
+                            <div class="card-body">
+                                <div class="row" >
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <div class="row" >
+                                                <div class="col-1"> </div>
+                                                <?php foreach ($pseguidos as $lista): ?>
+                                                    <h5 class="card-header"><?php echo $lista['titulo'] ?></h5>
+                                                    <a href="mostrarlistas.php?id_lista=<?php echo $lista['id_lista']?>" class="btn btn-primary">Ver lista</a>
+                                                <?php endforeach; ?>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        <?php endif ?>
                     </div>
 
                 </div>

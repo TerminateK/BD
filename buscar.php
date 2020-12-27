@@ -209,10 +209,10 @@ if(isset($_GET['seguir'])) {
                                                 <?php if(isset($sigue)): ?>
                                                     <?php if($_SESSION['ID_Cuenta'] != $dato['id_cuenta']): ?>
                                                         <?php if($sigue == null): ?>
-                                                            <button type="button" class="btn btn-success" onClick="location.href='buscar.php?data=<?php echo $data ?>&id_cuenta=<?php echo $dato['id_cuenta'] ?>&seguir=1'">Seguir</button>
+                                                            <button type="button" class="btn btn-light" onClick="location.href='buscar.php?data=<?php echo $data ?>&id_cuenta=<?php echo $dato['id_cuenta'] ?>&seguir=1'">Seguir</button>
 
                                                         <?php else: ?>
-                                                            <button type="button" class="btn btn-success" onClick="location.href='buscar.php?data=<?php echo $data ?>&id_cuenta=<?php echo $dato['id_cuenta'] ?>&seguir=2'">Dejar de seguir</button>
+                                                            <button type="button" class="btn btn-danger" onClick="location.href='buscar.php?data=<?php echo $data ?>&id_cuenta=<?php echo $dato['id_cuenta'] ?>&seguir=2'">Dejar de seguir</button>
                                                         <?php endif ?>
                                                     <?php endif ?>
                                                 <?php endif ?>
@@ -235,8 +235,8 @@ if(isset($_GET['seguir'])) {
                                             <div class="card-body">
                                                 <h5 class="card-title"><?php echo $dato['titulo'] ?></h5>
                                                 <p class="card-text" style="font-size:11px"><?php echo $dato['username'] ?></p>
-                                                <a href="mostrarlistas.php?id_lista=<?php echo $dato['id_lista']?>" class="btn btn-primary">Ver lista</a>
-                                                <a href="seguir_lista.php?id_lista=<?php echo $dato['id_lista']?>" class="btn btn-primary">Seguir lista</a>
+                                                <a href="mostrarlistas.php?id_lista=<?php echo $dato['id_lista']?>" class="btn btn-light">Ver lista</a>
+                                                <a href="seguir_playlist.php?id_lista=<?php echo $dato['id_lista']?>" class="btn btn-light">Seguir lista</a>
                                             </div>
                                         </div>
                                     </div>

@@ -226,7 +226,6 @@ if(isset ($_GET['id_cuenta']) ) {
         </div>
     </div>
     <!-- /#page-content-wrapper -->
-
 </div>
 <!-- /#wrapper -->
 

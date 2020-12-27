@@ -56,7 +56,7 @@ if($_POST){
         <div class="card">
             <h3>Iniciar sesión</h3>
             <div class="card-body">
-                <img src="kemonito.jpg" width="300  " height="150">
+                <img src="willy.jpg" width="300  " height="150">
                 <form method="POST">
                     <div class="form-group">
                         <div class="input-group-prepend">
